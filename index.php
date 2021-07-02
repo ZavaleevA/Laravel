@@ -15,7 +15,7 @@
 <body>
     <nav class="top-menu">
     <ul class="menu-main">
-    <li><a href="kabinet.php">Личный кабинет</a></li>
+    <li><a href="kabinet.php">Личный кабинет1</a></li>
     <li><a href="reg.php">Зарегистрироваться</a></li>
     <li><a href="" class="current">Войти</a></li>
     </ul>
