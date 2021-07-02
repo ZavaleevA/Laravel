@@ -40,7 +40,7 @@
                 </form>
             </div>
             <?php else: ?>
-        <meta http-equiv="refresh" content="0;https://zadanie1/kabinet.php">
+        <meta http-equiv="refresh" content="0;/kabinet.php">
     <?php endif; ?>
         </div>
     </div>  

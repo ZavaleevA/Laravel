@@ -11,15 +11,16 @@ if ($_GET['hash']) {
             if ($row['email_confirmed'] == 1) {
                 // Если всё верно, то делаем подтверждение
                 $mysql->query("UPDATE `users` SET `email_confirmed`=0 WHERE `id`=". $row['id'] );
+                $mysql->close();
                 echo "Email подтверждён";
             } else {
-                echo "Что то пошло не так";
+                echo "Что-то пошло не так";
             }
         } 
     } else {
-        echo "Что то пошло не так";
+        echo "Что-то пошло не так";
     }
 } else {
-    echo "Что то пошло не так";
+    echo "Что-то пошло не так";
 }
 ?>

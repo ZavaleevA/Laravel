@@ -29,8 +29,9 @@
 	$result = $mysql->query("SELECT * FROM `users` WHERE `name` = '$name' AND `surname` = '$surname' AND `pass` = '$pass'");
 	while( $row = mysqli_fetch_assoc($result) ) { 
             if ($row['email_confirmed'] == 0) {
-                setcookie('user', $user['name'], time() + 3600, "/");
-            } else {
+            	$hash = $row['hash'];
+            	setcookie('user', $user['hash'], time() + 3600, "/");
+                } else {
             	$mysql->close();
                echo "<h1 align='center'>Вы не подтвердили почту,<br> без подтвержения войти не получиться.<br> Чтобы вернуться назад, нажмите "?><a href="/index.php">сюда</a></h1><?php
                exit();

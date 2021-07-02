@@ -27,12 +27,39 @@
             if (!isset($_COOKIE['user'])):
         ?>          
 
-        <meta http-equiv="refresh" content="0;https://zadanie1/index.php">
+        <meta http-equiv="refresh" content="0; /index.php">
 
     <?php else: ?>
-        <h1 align="center"><img style="width: 35%; height: 35%;" src="photo/dog.jpg"><br>Привет, <?=$_COOKIE['user']?>! Чтобы выйти нажмите <a href="validation-form/exit.php">здесь</a>.</h1><br></h1>
-    <?php endif; ?>
-</div>
+        <?php
+            $mysql = new mysqli('127.0.0.1', 'root', 'root', 'register-bd1');
+            $hash = $_COOKIE['user'];
+            $result = $mysql->query("SELECT * FROM `users` WHERE `hash`='$hash'");
+            while( $row = mysqli_fetch_assoc($result) ) { 
+                $nameK = $row['name'];
+                $surnameK = $row['surname']; 
+                $mysql->close();
+                }
+        ?>
+        <h1 align="center"><img style="width: 35%; height: 35%;" src="photo/dog.jpg"><br>Привет, <?=$nameK?>! Чтобы выйти нажмите <a href="validation-form/exit.php">здесь</a>.</h1><br></h1><br>
+        <table border="3" align="center" width="50%" cellpadding="5" bgcolor="GreenYellow" bordercolor="Black">
+        <td>Name</td><td>Surname</td><td>Password</td><tr>
+        <td><?=$nameK?></td> <td><?=$surnameK?></td> <td> ******* </td><tr>
+        </table>
+        <br>
+        <div class="row">        
+            <div class="col" align="center">
+                <h2>Форма изменения данных</h2>
+                <h3>Можно изменить все значения сразу, либо одно</h3>
+                <form action="validation-form/rename.php" method="post">
+                <input type="text" class="form-control" name="name" id="name" placeholder="Введите новое имя"><br>
+                <input type="text" class="form-control" name="surname" id="surname" placeholder="Введите новую фамилию"><br>
+                <input type="password" class="form-control" name="pass" id="pass" placeholder="Введите новый пароль"><br>
+                <input type="password" class="form-control" name="passpodtv" id="passpodtv" placeholder="Подтвердите новый пароль"><br>
+                <button class="btn btn-success" type="submit">Изменить данные</button><br><br><br>
+                </form>
+                </div>
+            <?php endif; ?>
+        </div>
     </div>  
-</body>
+    </body>
 </html>
