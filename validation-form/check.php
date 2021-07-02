@@ -4,7 +4,6 @@
 	$email = filter_var(trim($_POST['email']), FILTER_SANITIZE_STRING);
 	$pass = filter_var(trim($_POST['pass']), FILTER_SANITIZE_STRING);
 	$passpodtv = filter_var(trim($_POST['passpodtv']), FILTER_SANITIZE_STRING);
-	
 
 	if(mb_strlen($name) < 2 || mb_strlen($name) > 70) {
 		echo "<h1 align='center'>Недопустимая длина имени,<br> пожалуйста, введите от 2 до 70 символов и повторите попытку ";?><a href="/reg.php">еще раз</a></h1><?php
@@ -28,8 +27,10 @@
 
 	$hash = md5($name . time());
 
+	$str = $_SERVER['DOCUMENT_ROOT'];
+
 	//Отправляем письмо подтверждения почты
-	mail($email, 'Подтверждение почты', 'Чтобы подтвердить Email, перейдите по ссылке: http://zadanie1/validation-form/check_hash.php?hash=' . $hash . '', 'From: zavaleev.sbase@gmail.com');
+	mail($email, 'Подтверждение почты', 'Чтобы подтвердить Email, перейдите по ссылке: http://' . substr($str, strrpos($str, '/') + 1) . '/validation-form/check_hash.php?hash=' . $hash . '', 'From: zavaleev.sbase@gmail.com');
     
     $pass = md5($pass."dXa2cK9Mar2P4");
         
