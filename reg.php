@@ -16,6 +16,7 @@
     <nav class="top-menu">
     <ul class="menu-main">
     <li><a href="kabinet.php">Личный кабинет</a></li>
+    <li><a href="comment.php">Комментарии</a></li>
     <li><a href="" class="current">Зарегистрироваться</a></li>
     <li><a href="index.php">Войти</a></li>
     </ul>

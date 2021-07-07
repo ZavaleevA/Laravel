@@ -16,6 +16,7 @@
     <nav class="top-menu">
     <ul class="menu-main">
     <li><a href="kabinet.php">Личный кабинет</a></li>
+    <li><a href="comment.php">Комментарии</a></li>
     <li><a href="reg.php">Зарегистрироваться</a></li>
     <li><a href="" class="current">Войти</a></li>
     </ul>
@@ -32,7 +33,6 @@
                 <h1>Форма авторизации</h1>
                 <form action="validation-form/auth.php" method="post">
                 <input type="text" class="form-control" name="name" id="name" placeholder="Введите имя"><br>
-                <input type="text" class="form-control" name="surname" id="surname" placeholder="Введите фамилию"><br>
                 <input type="password" class="form-control" name="pass" id="pass" placeholder="Введите пароль"><br>
                 <button class="btn btn-success" type="submit">Авторизоваться</button>
                 </form>

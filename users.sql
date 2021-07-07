@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 30 2021 г., 15:29
+-- Время создания: Июл 07 2021 г., 13:35
 -- Версия сервера: 8.0.19
 -- Версия PHP: 8.0.1
 
@@ -35,14 +35,15 @@ CREATE TABLE `users` (
   `pass` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `hash` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `email_confirmed` tinyint(1) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Дамп данных таблицы `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `surname`, `email`, `pass`, `hash`, `email_confirmed`) VALUES
-(9, 'Anton', 'Antonio', 'arsentii2278@gmail.com', '94d550448b90ce1afb7ccd31652729d0', '9c567d776b9f9082dda219114ad0f883', 0);
+(1, 'Anton', 'Antonio', 'arsentii2278@gmail.com', '94d550448b90ce1afb7ccd31652729d0', '9c567d776b9f9082dda219114ad0f883', 0),
+(2, 'Dan', 'DD', 'arsentii2278@gmail.com', '94d550448b90ce1afb7ccd31652729d0', '2377d81ee335cba6a0876cff865f4614', 0);
 
 --
 -- Индексы сохранённых таблиц
@@ -62,7 +63,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
