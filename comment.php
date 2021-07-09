@@ -1,25 +1,11 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Комментарии</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/navigation.css">
-    <style>
-  body { background: url(photo/grad1.jpg); }
-</style>
-</head>
-<body>
-    <nav class="top-menu">
-    <ul class="menu-main">
+<?php include 'layouts/header1.php';?>
+<title>Комментарии</title>
+<?php include 'layouts/header2.php';?>
+<?php include 'layouts/navbar1.php'; ?>
     <li><a href="kabinet.php">Личный кабинет</a></li>
     <li><a href="" class="current">Комментарии</a></li>
     <li><a href="validation-form/exit.php">Выйти</a></li>
-    </ul>
-    </nav>
+<?php include 'layouts/navbar2.php'; ?>
 
     <div class="container mt-4">
 
@@ -30,12 +16,11 @@
 
         <?php else: ?>
         <?php
-            $mysql = new mysqli('127.0.0.1', 'root', 'root', 'register-bd1');
+            include 'validation-form/database.php';
             $hash = $_COOKIE['user'];
             $result = $mysql->query("SELECT * FROM `users` WHERE `hash`='$hash'");
             while( $row = mysqli_fetch_assoc($result) ) { 
                 $nameC = $row['name'];
-                $mysql->close();
                 }
         ?>
 
@@ -46,63 +31,173 @@
                 <div class="mb-3">
                 <label for="comment" class="form-label">Комментарий будет от Вашего имени: <?=$nameC?></label>
                 <textarea class="form-control" name="comment" id="comment" rows="3" placeholder="Ваш комментарий"></textarea><br>
-                <button class="btn btn-info" type="submit">Отправить комментарий</button>                        
+                <button class="btn btn-info" type="submit">Отправить комментарий</button>
                 </form>
                 </div>
             </div>
             <?php endif; ?>
             </div>
 
+            
             <!--Вывод комментариев с БД-->
             <?php
-            $mysql = new mysqli('127.0.0.1', 'root', 'root', 'register-bd1');
-
+            
             //Вывод БД наоборот        
             $sql = "SELECT * FROM comments ORDER BY id DESC"; 
             $result = $mysql->query($sql);
             if ($result->num_rows > 0) {
 
+            //Имя пользователя который оставил комментарий
             while($row = $result->fetch_assoc()) {
-
                 $user_id = $row['user_id'];
                 $result2 = $mysql->query("SELECT * FROM `users` WHERE `id`='$user_id'");
                 while( $row2 = mysqli_fetch_assoc($result2) ) {
                 $name  = $row2['name']; 
                 }
+                ?>
 
-                echo '<br>';
-                echo '<table border="0" align="center" width="75%" cellpadding="7" bordercolor="Black">';
-                
+                <br><br>
+                <table border="0" align="center" width="75%" cellpadding="7" bordercolor="Black">
+
+                <?php
                 //Отредактировано ли сообщение или нет
                 if ($row["date_edit"] != ''){
-                    echo "<td bgcolor='#0dd3de' align='left'>Name: " . $name. "</td><td bgcolor='#0dd3de' align='right'>Time: " . $row["date_c"]. "  (Edit: " . $row["date_edit"]. ")</td><tr>";
+                    ?>
+
+                    <td bgcolor='#0dd3de' align='left'>Name: <?=$name?></td>
+                    <td bgcolor='#0dd3de' align='right'>Time: <?=$row["date_c"]?> (Edit: <?=$row["date_edit"]?>)</td><tr>
+
+                    <?php
                 } else {
-                    echo "<td bgcolor='#0dd3de' align='left'>Name: " . $name. "</td><td bgcolor='#0dd3de' align='right'>Time: " . $row["date_c"]. "</td><tr>";
+                    ?>
+
+                    <td bgcolor='#0dd3de' align='left'>Name: <?=$name?></td>
+                    <td bgcolor='#0dd3de' align='right'>Time: <?=$row["date_c"]?></td><tr>
+
+                    <?php   
                 }
+                ?>
+
+                </table>
+                <table border="0" align="center" width="75%" cellpadding="15" bordercolor="Black">
+                <td bgcolor='white'><?=$row["comment"]?></td><tr>
+                </table>
                 
-                echo '</table>';
-                echo '<table border="0" align="center" width="75%" cellpadding="15" bordercolor="Black">';
-                echo "<td bgcolor='white'>" . $row["comment"]. "</td><tr>";
-                echo '</table>';
-                                
+                <?php  
+                //Айди авторизированого сейчас пользователя                
                 $hash = $_COOKIE['user'];
                 $result3 = $mysql->query("SELECT * FROM `users` WHERE `hash`='$hash'");
                 while( $row3 = mysqli_fetch_assoc($result3) ) {
                 $user_id2  = $row3['id']; 
                 }
+                ?>
 
+                <table border="0" align="center" width="75%" cellpadding="7" bordercolor="Black">
+
+                <?php 
                 if($user_id2 == $row["user_id"]){
-                    echo '<table border="0" align="center" width="75%" cellpadding="7" bordercolor="Black">';
-                    echo "<td bgcolor='#eeff00' align='right'><a style='color: Black;' ' href='validation-form/edit_comment.php?id=" . $row["id"] . "'>Редактировать</a> <a style='color: Black;' ' href='validation-form/delete_comment.php?id=" . $row["id"] . "'>Удалить</a></td><tr>";
-                    echo '</table>';
+                //Комментарий данного авторизированого пользователя
+                ?>                  
+                    <td bgcolor='#eb8934' align='right'>
+                    <a style="color: Black;" href="validation-form/edit_comment.php?id=<?=$row["id"]?>">Редактировать</a>
+                    <a style="color: Black;" href="validation-form/delete_comment.php?id=<?=$row["id"]?>">Удалить</a>
+                    </td><tr>
+                
+                <?php
+                } else {
+                    //Ответить на комментарий
+                    ?>
+
+                    <td bgcolor='#eb8934' align='right'>
+                        <a style="color: Black;" href="validation-form/reply_comment.php?id=<?=$row["id"]?>">Ответить</a>
+
+                <?php
+                }
+                ?>
+
+                </table>
+                
+                <?php
+                //Выводим ответ на комментарий
+                //Вывод БД ответы на комменты наоборот        
+                $sql_reply = "SELECT * FROM reply_comment ORDER BY id_reply DESC"; 
+                $result_reply = $mysql->query($sql_reply);
+                if ($result_reply->num_rows > 0) {
+
+                    //Имя пользователя который ответил на комментарий
+                    while($row_reply = $result_reply->fetch_assoc()) {
+                    $id_reply_user = $row_reply['id_reply_user'];
+                    $result_reply_2 = $mysql->query("SELECT * FROM `users` WHERE `id`='$id_reply_user'");
+                    while( $row_reply_2 = mysqli_fetch_assoc($result_reply_2) ) {
+                    $name_user_reply  = $row_reply_2['name']; 
                 }
 
+                //Проверяем, есть ли ответ на этот комментарий
+                if ($row_reply['id_comment'] == $row["id"]){
+                ?>
+
+                <br><br>
+                <table border="0" align="center" width="60%" cellpadding="7" bordercolor="Black">
+                
+                <?php
+                //Отредактировано ли сообщение или нет
+                if ($row_reply["edit_date_reply"] != ''){
+                    ?>
+
+                    <td bgcolor='#0dd3de' align='left'>&#9989 Name: <?=$name_user_reply?></td>
+                    <td bgcolor='#0dd3de' align='right'>Time: <?=$row_reply["date_reply"]?> (Edit: <?=$row_reply["edit_date_reply"]?>)</td><tr>
+
+                    <?php
+                } else {
+                    ?>
+
+                    <td bgcolor='#0dd3de' align='left'>&#9989 Name: <?=$name_user_reply?></td>
+                    <td bgcolor='#0dd3de' align='right'>Time: <?=$row_reply["date_reply"]?></td><tr>
+
+                <?php                        
                 }
-                echo '<br>';
-                echo '<br>';
+                ?>
+
+                </table>
+                <table border="0" align="center" width="60%" cellpadding="15" bordercolor="Black">
+                <td bgcolor='white'><?=$row_reply["reply_comment"]?></td><tr>
+                </table>
+                <table border="0" align="center" width="60%" cellpadding="7" bordercolor="Black">
+
+                <?php
+                if($user_id2 == $row_reply["id_reply_user"]){
+                //Комментарий данного авторизированого пользователя
+                ?>
+
+                    <td bgcolor='#eb8934' align='right'>
+                    <a style="color: Black;"  href="validation-form/editReplyForComment.php?replyOnCommentId=<?=$row_reply["id_reply"]?>">Редактировать</a>
+                    <a style="color: Black;"  href="validation-form/deleteReplyComment.php?idReplyComment=<?=$row_reply["id_reply"]?>">Удалить</a></td><tr>
+                
+                <?php
+                } else {
+                    //Ответить на комментарий
+                    ?>
+
+                    <td bgcolor='#eb8934' align='right'>
+                    <a style="color: Black;" href="validation-form/reply_comment.php?id=<?=$row_reply["id_reply"]?>">Ответить (off)</a>
+
+                    <?php    
                 }
+                ?>
+
+                </table>
+                
+                <?php
+                }
+                }
+                }
+                }
+                }
+                ?>
+
+                <br><br>
+
+                <?php
                 $mysql->close();
-                ?> 
-        </div>      
-    </body>
-</html>
+                ?>    
+<?php include 'layouts/footer.php'; ?>

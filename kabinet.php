@@ -1,25 +1,11 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<?php include 'layouts/header1.php';?>
     <title>Личный кабинет</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/navigation.css">
-    <style>
-  body { background: url(photo/grad1.jpg); }
-</style>
-</head>
-<body>
-    <nav class="top-menu">
-    <ul class="menu-main">
+<?php include 'layouts/header2.php';?>
+<?php include 'layouts/navbar1.php'; ?>
     <li><a href= "" class="current">Личный кабинет</a></li>
     <li><a href="comment.php">Комментарии</a></li>
     <li><a href="validation-form/exit.php">Выйти</a></li>
-    </ul>
-    </nav>
+<?php include 'layouts/navbar2.php'; ?>
 
     <div class="container mt-4">
 
@@ -31,16 +17,25 @@
 
     <?php else: ?>
         <?php
-            $mysql = new mysqli('127.0.0.1', 'root', 'root', 'register-bd1');
+            include 'validation-form/database.php';
             $hash = $_COOKIE['user'];
             $result = $mysql->query("SELECT * FROM `users` WHERE `hash`='$hash'");
             while( $row = mysqli_fetch_assoc($result) ) { 
                 $nameK = $row['name'];
-                $surnameK = $row['surname']; 
+                $surnameK = $row['surname'];
+                $avatar = $row['avatar']; 
                 $mysql->close();
                 }
         ?>
-        <h1 align="center"><img style="width: 35%; height: 35%;" src="photo/dog.jpg"><br>Привет, <?=$nameK?>! Чтобы выйти нажмите <a href="validation-form/exit.php">здесь</a>.</h1><br></h1><br>
+        <h1 align="center">
+
+        <?php
+            if ($avatar == ''){
+                $avatar = '/photo/dog.jpg';
+            } 
+        ?>
+
+        <img style="width: 35%; height: 35%;" src="<?=$avatar?>"><br>Привет, <?=$nameK?>! Чтобы выйти нажмите <a href="validation-form/exit.php">здесь</a>.</h1><br></h1><br>
         <table border="3" align="center" width="50%" cellpadding="5" bgcolor="GreenYellow" bordercolor="Black">
         <td>Name</td><td>Surname</td><td>Password</td><tr>
         <td><?=$nameK?></td> <td><?=$surnameK?></td> <td> ******* </td><tr>
@@ -51,15 +46,15 @@
                 <h2>Форма изменения данных</h2>
                 <h3>Можно изменить все значения сразу, либо одно</h3>
                 <form action="validation-form/rename.php" method="post">
-                <input type="text" class="form-control" name="name" id="name" placeholder="Введите новое имя"><br>
-                <input type="text" class="form-control" name="surname" id="surname" placeholder="Введите новую фамилию"><br>
+                <textarea class="form-control" name="name" id="name" rows="1"><?=$nameK?></textarea><br>
+                <textarea class="form-control" name="surname" id="surname" rows="1"><?=$surnameK?></textarea><br>
                 <input type="password" class="form-control" name="pass" id="pass" placeholder="Введите новый пароль"><br>
                 <input type="password" class="form-control" name="passpodtv" id="passpodtv" placeholder="Подтвердите новый пароль"><br>
-                <button class="btn btn-success" type="submit">Изменить данные</button><br><br><br>
+                <button class="btn btn-success" type="submit">Изменить данные</button>
+                <a href="validation-form/loading.php" class="btn btn-primary" >Поменять фото</a>
+                <a href="validation-form/delete_photo.php" class="btn btn-danger" >Удалить фото</a><br><br><br>
                 </form>
                 </div>
             <?php endif; ?>
         </div>
-    </div>  
-    </body>
-</html>
+<?php include 'layouts/footer.php'; ?>

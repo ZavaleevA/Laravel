@@ -27,19 +27,18 @@
 
 	$hash = md5($name . time());
 
-	$str = $_SERVER['DOCUMENT_ROOT'];
+	$server = $_SERVER['HTTP_HOST'];
 
 	//Отправляем письмо подтверждения почты
-	mail($email, 'Подтверждение почты', 'Чтобы подтвердить Email, перейдите по ссылке: http://' . substr($str, strrpos($str, '/') + 1) . '/validation-form/check_hash.php?hash=' . $hash . '', 'From: zavaleev.sbase@gmail.com');
+	mail($email, 'Подтверждение почты', 'Чтобы подтвердить Email, перейдите по ссылке: http://' . substr($server, strrpos($server, '/')) . '/validation-form/check_hash.php?hash=' . $hash . '', 'From: zavaleev.sbase@gmail.com');
     
     $pass = md5($pass."dXa2cK9Mar2P4");
         
         // Добавление пользователя в БД
-	$mysql = new mysqli('127.0.0.1', 'root', 'root', 'register-bd1');
+	include 'database.php';
 	$mysql->query("INSERT INTO `users` (`name`, `surname`, `email`, `pass`, `hash`, `email_confirmed`) VALUES('$name', '$surname', '$email', '$pass', '$hash', '1')");
 
 	echo "<h1 align='center'>Вы успешно зарегистрировались,<br> чтобы войти в свой аккаунт нужно подтвредить почту, чтобы выйти - нажмите ";?><a href="/reg.php">здесь</a></h1><?php
 		
 	$mysql->close();
-   	//header('Location: /reg.php');
 ?>

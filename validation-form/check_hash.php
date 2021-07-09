@@ -1,5 +1,5 @@
 <?php
-	$mysql = new mysqli('127.0.0.1', 'root', 'root', 'register-bd1'); 
+	include 'database.php'; 
 	// Проверка есть ли хеш
 if ($_GET['hash']) {
     $hash = $_GET['hash'];
@@ -12,15 +12,18 @@ if ($_GET['hash']) {
                 // Если всё верно, то делаем подтверждение
                 $mysql->query("UPDATE `users` SET `email_confirmed`=0 WHERE `id`=". $row['id'] );
                 $mysql->close();
-                echo "Email подтверждён";
+                header('Location: /index.php');
             } else {
                 echo "Что-то пошло не так";
+                $mysql->close();
             }
         } 
     } else {
         echo "Что-то пошло не так";
+        $mysql->close();
     }
 } else {
     echo "Что-то пошло не так";
+    $mysql->close();
 }
 ?>

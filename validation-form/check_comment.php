@@ -7,7 +7,7 @@
 		exit();
 	}
 	  
-    $mysql = new mysqli('127.0.0.1', 'root', 'root', 'register-bd1');
+    include 'database.php';
 	$hash = $_COOKIE['user'];
     $result = $mysql->query("SELECT * FROM `users` WHERE `hash`='$hash'");
         while( $row = mysqli_fetch_assoc($result) ) {

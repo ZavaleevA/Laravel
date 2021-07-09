@@ -4,7 +4,7 @@
 	$pass = filter_var(trim($_POST['pass']), FILTER_SANITIZE_STRING);
 	$passpodtv = filter_var(trim($_POST['passpodtv']), FILTER_SANITIZE_STRING);
 
-	$mysql = new mysqli('127.0.0.1', 'root', 'root', 'register-bd1');
+	include 'database.php';
 	$hash = $_COOKIE['user'];
             $result = $mysql->query("SELECT * FROM `users` WHERE `hash`='$hash'");
             while( $row = mysqli_fetch_assoc($result) ) { 
@@ -40,5 +40,5 @@
 	}    
 		
 	$mysql->close();
-	header('Location: /kabinet.php');
+	header('Location: /index.php');
 ?>
