@@ -1,5 +1,5 @@
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/layouts/header1.php';?>
-    <title>Ответить на комментарий</title>
+    <title>Ответить на под-комментарий</title>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/layouts/header2.php';?>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/layouts/navbar1.php'; ?>
     <li><a href="/kabinet.php">Личный кабинет</a></li>
@@ -29,19 +29,20 @@
             while( $row = mysqli_fetch_assoc($result) ) { 
                 $nameC = $row['name'];
             }
-            $id_comment = $_GET['id'];
-            $row_reply = $mysql->query("SELECT * FROM `comments` WHERE `id`='$id_comment'");
-            while( $row_edit = mysqli_fetch_assoc($row_reply) ) {
-                $reply_id_comment = $row_edit['id'];
-                $reply_user_id = $row_edit['user_id']; 
-                $reply_comment = $row_edit['comment'];
-                $reply_date_comment = $row_edit['date_c'];
-                $reply_edit_comment = $row_edit['date_edit'];
+            $idSubComment = $_GET['id'];
+            $rowReply = $mysql->query("SELECT * FROM `reply_comment` WHERE `id_reply`='$idSubComment'");
+            while( $rowEdit = mysqli_fetch_assoc($rowReply) ) {
+                $replyIdSubComment = $rowEdit['id_reply'];
+                $replyIdUser = $rowEdit['id_reply_user']; 
+                $replySubComment = $rowEdit['reply_comment'];
+                $replyDateSubComment = $rowEdit['date_reply'];
+                $replyEditSubComment = $rowEdit['edit_date_reply'];
+                $id_comment = $rowEdit['id_comment'];
             } 
 
-            $result_reply_comment = $mysql->query("SELECT * FROM `users` WHERE `id`='$reply_user_id'");
-            while( $row_reply_comment = mysqli_fetch_assoc($result_reply_comment) ) {
-                $user_name_reply_comment  = $row_reply_comment['name']; 
+            $resultReplySubComment = $mysql->query("SELECT * FROM `users` WHERE `id`='$replyIdUser'");
+            while( $rowReplySubComment = mysqli_fetch_assoc($resultReplySubComment) ) {
+                $userNameReplySubComment  = $rowReplySubComment['name']; 
             }
 
             //Вывод самого комментария на который хотят ответить
@@ -52,18 +53,18 @@
              
             <?php   
             //Отредактировано ли сообщение или нет
-            if ($reply_edit_comment != ''){
+            if ($replyEditSubComment != ''){
                 ?>
 
-                <td bgcolor='#0dd3de' align='left'>Name: <?=$user_name_reply_comment?></td>
-                <td bgcolor='#0dd3de' align='right'>Time: <?=$reply_date_comment?> (Edit: <?=$reply_edit_comment?>)</td><tr>
+                <td bgcolor='#0dd3de' align='left'>Name: <?=$userNameReplySubComment?></td>
+                <td bgcolor='#0dd3de' align='right'>Time: <?=$replyDateSubComment?> (Edit: <?=$replyEditSubComment?>)</td><tr>
 
                 <?php
             } else {
                     ?>
 
-                    <td bgcolor='#0dd3de' align='left'>Name: <?=$user_name_reply_comment?></td>
-                    <td bgcolor='#0dd3de' align='right'>Time: <?=$reply_date_comment?></td><tr>
+                    <td bgcolor='#0dd3de' align='left'>Name: <?=$userNameReplySubComment?></td>
+                    <td bgcolor='#0dd3de' align='right'>Time: <?=$replyDateSubComment?></td><tr>
                     
                     <?php
                     }
@@ -71,16 +72,17 @@
                 
             </table>
             <table border="0" align="center" width="75%" cellpadding="15" bordercolor="Black">
-            <td bgcolor='white'><?=$reply_comment?></td><tr>
+            <td bgcolor='white'><?=$replySubComment?></td><tr>
             </table>
             <table border="0" align="center" width="75%" cellpadding="7" bordercolor="Black">
             <td bgcolor='#25ba48' align='right'><a style="color: Black;" href="/comment.php">Отмена</a></td><tr>
             </table>
-        
-                <form action="check_reaply_comment.php?id=<?=$reply_id_comment?>" method="post">
+                
+                <!--Форма для заполнения ответа на сообщение-->
+                <form action="checkReplySubComment.php?id=<?=$replyIdSubComment?>" method="post">
                 <div class="mb-3"><br>
-                <label for="reply_comment" class="form-label">Ответ будет от Вашего имени: <?=$nameC?></label>
-                <textarea class="form-control" name="reply_comment" id="reply_comment" rows="3" placeholder="Ваш ответ"></textarea><br>
+                <label for="replySubComment" class="form-label">Ответ будет от Вашего имени: <?=$nameC?></label>
+                <textarea class="form-control" name="replySubComment" id="replySubComment" rows="3" placeholder="Ваш ответ"></textarea><br>
                 <button class="btn btn-info" type="submit">Ответить на комментарий</button>                        
                 </form>
                 <a href="/comment.php" class="btn btn-warning" >Отмена</a> 
@@ -231,11 +233,28 @@
 
                 <?php                        
                 }
+                //replyIdSubComment
                 ?>
 
                 </table>
                 <table border="0" align="center" width="67%" cellpadding="15" bordercolor="Black">
-                <td bgcolor='white'><?=$row_reply["reply_comment"]?></td><tr>
+                
+                <?php
+                if ($replyIdSubComment == $row_reply["id_reply"]){
+                    ?>
+
+                    <td bgcolor='adadad'><?=$row_reply["reply_comment"]?></td><tr>
+
+                    <?php
+                } else {
+                    ?>
+
+                    <td bgcolor='white'><?=$row_reply["reply_comment"]?></td><tr>
+
+                   <?php 
+                }
+                ?>
+
                 </table>
                 <table border="0" align="center" width="67%" cellpadding="7" bordercolor="Black">
 
@@ -253,15 +272,27 @@
                     //Ответить на комментарий
                     ?>
 
-                    <td bgcolor='#eb8934' align='right'>
-                    <a style="color: Black;" href="replySubComment.php?id=<?=$row_reply["id_reply"]?>">Ответить</a></td><tr>
+                    <?php
+                    if ($replyIdSubComment == $row_reply["id_reply"]){
+                    ?>
 
-                    <?php    
+                        <td bgcolor='#25ba48' align='right'>
+                        <a style="color: Black;" href="/comment.php">Отмена</a></td><tr>
+
+                    <?php
+                    } else {
+                    ?>
+
+                        <td bgcolor='#eb8934' align='right'>
+                        <a style="color: Black;" href="replySubComment.php?id=<?=$row_reply["id_reply"]?>">Ответить</a></td><tr>
+
+                    <?php 
+                    }   
                 }
                 ?>
 
                 </table>
-
+                
                 <?php
                 //******************************************************************
                 //Выводим ответы на под-комментарии

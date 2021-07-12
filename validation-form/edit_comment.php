@@ -169,32 +169,32 @@
                 ?>
 
                 <br><br>
-                <table border="0" align="center" width="60%" cellpadding="7" bordercolor="Black">
+                <table border="0" align="center" width="67%" cellpadding="7" bordercolor="Black">
                 
                 <?php
                 //Отредактировано ли сообщение или нет
                 if ($row_reply["edit_date_reply"] != ''){
                     ?>
 
-                    <td bgcolor='#0dd3de' align='left'>&#9989 Name: <?=$name_user_reply?></td>
-                    <td bgcolor='#0dd3de' align='right'>Time: <?=$row_reply["date_reply"]?> (Edit: <?=$row_reply["edit_date_reply"]?>)</td><tr>
+                    <td bgcolor='#9bd930' align='left'>&#9989 Name: <?=$name_user_reply?></td>
+                    <td bgcolor='#9bd930' align='right'>Time: <?=$row_reply["date_reply"]?> (Edit: <?=$row_reply["edit_date_reply"]?>)</td><tr>
 
                     <?php
                 } else {
                     ?>
 
-                    <td bgcolor='#0dd3de' align='left'>&#9989 Name: <?=$name_user_reply?></td>
-                    <td bgcolor='#0dd3de' align='right'>Time: <?=$row_reply["date_reply"]?></td><tr>
+                    <td bgcolor='#9bd930' align='left'>&#9989 Name: <?=$name_user_reply?></td>
+                    <td bgcolor='#9bd930' align='right'>Time: <?=$row_reply["date_reply"]?></td><tr>
 
                 <?php                        
                 }
                 ?>
 
                 </table>
-                <table border="0" align="center" width="60%" cellpadding="15" bordercolor="Black">
+                <table border="0" align="center" width="67%" cellpadding="15" bordercolor="Black">
                 <td bgcolor='white'><?=$row_reply["reply_comment"]?></td><tr>
                 </table>
-                <table border="0" align="center" width="60%" cellpadding="7" bordercolor="Black">
+                <table border="0" align="center" width="67%" cellpadding="7" bordercolor="Black">
 
                 <?php
                 if($user_id2 == $row_reply["id_reply_user"]){
@@ -211,15 +211,85 @@
                     ?>
 
                     <td bgcolor='#eb8934' align='right'>
-                    <a style="color: Black;" href="reply_comment.php?id=<?=$row_reply["id_reply"]?>">Ответить (off)</a>
+                    <a style="color: Black;" href="replySubComment.php?id=<?=$row_reply["id_reply"]?>">Ответить</a></td><tr>
 
                     <?php    
                 }
                 ?>
 
                 </table>
+
+                <?php
+                //******************************************************************
+                //Выводим ответы на под-комментарии
+                //Вывод БД ответы на комменты наоборот        
+                $sqlSubComment = "SELECT * FROM reply_comment ORDER BY id_reply DESC"; 
+                $resultSubComment = $mysql->query($sqlSubComment);
+                if ($resultSubComment->num_rows > 0) {
+
+                    //Имя пользователя который ответил на комментарий
+                    while($rowSubComment = $resultSubComment->fetch_assoc()) {
+                    $idUserSubComment = $rowSubComment['id_reply_user'];
+                    $resultSubComment2 = $mysql->query("SELECT * FROM `users` WHERE `id`='$id_reply_user'");
+                    while( $rowSubComment2 = mysqli_fetch_assoc($resultSubComment2) ) {
+                    $nameUserSubComment  = $rowSubComment2['name']; 
+                }
+
+                //Проверяем, есть ли ответ на этот комментарий
+                if ($rowSubComment['id_sub_comment'] == $row_reply['id_reply']){
+                ?>
+
+                <br><br>
+                <table border="0" align="center" width="60%" cellpadding="7" bordercolor="Black">
                 
                 <?php
+                //Отредактировано ли сообщение или нет
+                if ($rowSubComment["edit_date_reply"] != ''){
+                    ?>
+
+                    <td bgcolor='#d12492' align='left'>&#128293 Name: <?=$nameUserSubComment?></td>
+                    <td bgcolor='#d12492' align='right'>Time: <?=$rowSubComment["date_reply"]?> (Edit: <?=$rowSubComment["edit_date_reply"]?>)</td><tr>
+
+                    <?php
+                } else {
+                    ?>
+
+                    <td bgcolor='#d12492' align='left'>&#128293 Name: <?=$nameUserSubComment?></td>
+                    <td bgcolor='#d12492' align='right'>Time: <?=$rowSubComment["date_reply"]?></td><tr>
+
+                <?php                        
+                }
+                ?>
+
+                <!--Комментарий-->
+                </table>
+                <table border="0" align="center" width="60%" cellpadding="15" bordercolor="Black">
+                <td bgcolor='white'><?=$rowSubComment["reply_comment"]?></td><tr>
+                </table>
+                <table border="0" align="center" width="60%" cellpadding="7" bordercolor="Black">
+
+                <?php
+                if($user_id2 == $rowSubComment["id_reply_user"]){
+                //Комментарий данного авторизированого пользователя
+                ?>
+
+                    <td bgcolor='#eb8934' align='right'>
+                    <a style="color: Black;"  href="editSubComment.php?editSubComment=<?=$rowSubComment["id_reply"]?>">Редактировать</a>
+                    <a style="color: Black;"  href="deleteSubComment.php?idDeleteSubComment=<?=$rowSubComment["id_reply"]?>">Удалить</a></td><tr>
+                
+                
+                <?php
+                }
+                ?>
+
+                </table>
+                
+                <?php
+                }
+                }
+                }
+                //******************************************************************
+                
                 }
                 }
                 }

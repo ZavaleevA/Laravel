@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июл 09 2021 г., 16:48
+-- Время создания: Июл 12 2021 г., 17:41
 -- Версия сервера: 8.0.19
 -- Версия PHP: 8.0.1
 
@@ -40,9 +40,10 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `comment`, `date_c`, `user_id`, `date_edit`) VALUES
-(2, 'Comment 2', '2021-07-09 16:42:47', 2, NULL),
-(3, 'Comment 3', '2021-07-09 16:43:28', 1, NULL),
-(4, 'Comment 4 msfs1', '2021-07-09 16:43:35', 1, '2021-07-09 16:44:44');
+(1, '1 ksngre', '2021-07-12 17:35:42', 2, NULL),
+(2, '2 slnjrer', '2021-07-12 17:35:46', 2, NULL),
+(3, '3 lknthltr', '2021-07-12 17:36:12', 1, NULL),
+(4, '4 sjrghkre', '2021-07-12 17:36:15', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -53,7 +54,8 @@ INSERT INTO `comments` (`id`, `comment`, `date_c`, `user_id`, `date_edit`) VALUE
 CREATE TABLE `reply_comment` (
   `id_reply` int UNSIGNED NOT NULL,
   `reply_comment` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `id_comment` int NOT NULL,
+  `id_comment` int DEFAULT NULL,
+  `id_sub_comment` int DEFAULT NULL,
   `id_reply_user` int NOT NULL,
   `date_reply` datetime NOT NULL,
   `edit_date_reply` datetime DEFAULT NULL
@@ -63,12 +65,15 @@ CREATE TABLE `reply_comment` (
 -- Дамп данных таблицы `reply_comment`
 --
 
-INSERT INTO `reply_comment` (`id_reply`, `reply_comment`, `id_comment`, `id_reply_user`, `date_reply`, `edit_date_reply`) VALUES
-(1, 'PodComment 2.1 smrgnrh', 2, 1, '2021-07-09 16:43:58', NULL),
-(2, 'PodComment 2.2 TTTsg2u853', 2, 1, '2021-07-09 16:44:16', '2021-07-09 16:44:22'),
-(4, 'PodComment 4.1 dsngcw', 4, 2, '2021-07-09 16:45:34', NULL),
-(6, 'PodComment 4.3 cseq', 4, 2, '2021-07-09 16:45:57', NULL),
-(7, 'PodComment 3.1 zljgrny', 3, 2, '2021-07-09 16:46:10', NULL);
+INSERT INTO `reply_comment` (`id_reply`, `reply_comment`, `id_comment`, `id_sub_comment`, `id_reply_user`, `date_reply`, `edit_date_reply`) VALUES
+(1, '2.1 osngr', 2, NULL, 1, '2021-07-12 17:36:22', NULL),
+(2, '1.2 skbfew', 1, NULL, 1, '2021-07-12 17:36:33', '2021-07-12 17:36:41'),
+(3, '4.1 fdkjr', 4, NULL, 2, '2021-07-12 17:37:34', NULL),
+(4, '3.1 dlsjnrhg', 3, NULL, 2, '2021-07-12 17:37:39', NULL),
+(5, '1.2.1 ldfljrehrthrge', NULL, 2, 2, '2021-07-12 17:39:03', '2021-07-12 17:39:10'),
+(6, '2.1.1 dmrohrt', NULL, 1, 2, '2021-07-12 17:39:33', NULL),
+(7, '4.1.1 sdsqq1124', NULL, 3, 1, '2021-07-12 17:40:23', NULL),
+(8, '3.1.1 lsnurg', NULL, 4, 1, '2021-07-12 17:40:30', NULL);
 
 -- --------------------------------------------------------
 
@@ -131,7 +136,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT для таблицы `reply_comment`
 --
 ALTER TABLE `reply_comment`
-  MODIFY `id_reply` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_reply` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `users`

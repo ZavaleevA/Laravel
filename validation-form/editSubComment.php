@@ -1,5 +1,5 @@
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/layouts/header1.php';?>
-    <title>Ответить на комментарий</title>
+    <title>Редактировать комментарий</title>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/layouts/header2.php';?>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/layouts/navbar1.php'; ?>
     <li><a href="/kabinet.php">Личный кабинет</a></li>
@@ -15,80 +15,50 @@
         <meta http-equiv="refresh" content="0; /index.php">
 
         <?php else: ?>
-
-            <div class="row">
-            <div class="col" align="center">
-                <h1>Ответить на комментарий:</h1>
-        
-        <!--Выводим комментарий на который хотят ответить-->
-         <?php
-            //Ищем дату, имя владельца комментария, проверяем редактирован или нет и выводим
+        <?php
             include 'database.php';
             $hash = $_COOKIE['user'];
             $result = $mysql->query("SELECT * FROM `users` WHERE `hash`='$hash'");
             while( $row = mysqli_fetch_assoc($result) ) { 
                 $nameC = $row['name'];
             }
-            $id_comment = $_GET['id'];
-            $row_reply = $mysql->query("SELECT * FROM `comments` WHERE `id`='$id_comment'");
-            while( $row_edit = mysqli_fetch_assoc($row_reply) ) {
-                $reply_id_comment = $row_edit['id'];
-                $reply_user_id = $row_edit['user_id']; 
-                $reply_comment = $row_edit['comment'];
-                $reply_date_comment = $row_edit['date_c'];
-                $reply_edit_comment = $row_edit['date_edit'];
-            } 
-
-            $result_reply_comment = $mysql->query("SELECT * FROM `users` WHERE `id`='$reply_user_id'");
-            while( $row_reply_comment = mysqli_fetch_assoc($result_reply_comment) ) {
-                $user_name_reply_comment  = $row_reply_comment['name']; 
+            
+            $editSubComment = $_GET['editSubComment'];
+            $result_edit = $mysql->query("SELECT * FROM `reply_comment` WHERE `id_reply`='$editSubComment'");
+            while( $rowEditSubComment = mysqli_fetch_assoc($result_edit) ) { 
+                $edit_comment = $rowEditSubComment['reply_comment'];
+                $idSubCommentForEdit = $rowEditSubComment['id_sub_comment'];
             }
 
-            //Вывод самого комментария на который хотят ответить
-            ?>
+            $resultEditSubCommentar1 = $mysql->query("SELECT * FROM `reply_comment` WHERE `id_reply`='$idSubCommentForEdit'");
+            while( $rowEditReplyComment = mysqli_fetch_assoc($resultEditSubCommentar1) ) {
 
-            <br>
-            <table border="0" align="center" width="75%" cellpadding="7" bordercolor="Black">
-             
-            <?php   
-            //Отредактировано ли сообщение или нет
-            if ($reply_edit_comment != ''){
-                ?>
+                $idForEditSubComment = $rowEditReplyComment['id_comment'];
+                $idForEditReplyOnComment = $rowEditReplyComment['id_reply'];
 
-                <td bgcolor='#0dd3de' align='left'>Name: <?=$user_name_reply_comment?></td>
-                <td bgcolor='#0dd3de' align='right'>Time: <?=$reply_date_comment?> (Edit: <?=$reply_edit_comment?>)</td><tr>
+            }
+            
+            $resultEditSubCommentar = $mysql->query("SELECT * FROM `comments` WHERE `id`='$idForEditSubComment'");
+            while( $row = mysqli_fetch_assoc($resultEditSubCommentar) ) { 
+                $edit_id = $row['id'];
+            }
+        ?>
 
-                <?php
-            } else {
-                    ?>
-
-                    <td bgcolor='#0dd3de' align='left'>Name: <?=$user_name_reply_comment?></td>
-                    <td bgcolor='#0dd3de' align='right'>Time: <?=$reply_date_comment?></td><tr>
-                    
-                    <?php
-                    }
-                    ?>
-                
-            </table>
-            <table border="0" align="center" width="75%" cellpadding="15" bordercolor="Black">
-            <td bgcolor='white'><?=$reply_comment?></td><tr>
-            </table>
-            <table border="0" align="center" width="75%" cellpadding="7" bordercolor="Black">
-            <td bgcolor='#25ba48' align='right'><a style="color: Black;" href="/comment.php">Отмена</a></td><tr>
-            </table>
-        
-                <form action="check_reaply_comment.php?id=<?=$reply_id_comment?>" method="post">
-                <div class="mb-3"><br>
-                <label for="reply_comment" class="form-label">Ответ будет от Вашего имени: <?=$nameC?></label>
-                <textarea class="form-control" name="reply_comment" id="reply_comment" rows="3" placeholder="Ваш ответ"></textarea><br>
-                <button class="btn btn-info" type="submit">Ответить на комментарий</button>                        
+        <div class="row">
+            <div class="col" align="center">
+                <h1>Редактировать комментарий</h1>
+                <form action="checkEditSubComment.php?idEditSubComment=<?=$editSubComment?>" method="post">
+                <div class="mb-3">
+                <label for="comment_edit" class="form-label">Комментарий будет от Вашего имени: <?=$nameC?></label>  
+                <textarea class="form-control" name="comment_edit" id="comment_edit" rows="3"><?=$edit_comment?></textarea><br>
+                <button class="btn btn-info" type="submit">Отредактировать комментарий</button>                  
                 </form>
-                <a href="/comment.php" class="btn btn-warning" >Отмена</a> 
+                <a href="/comment.php" class="btn btn-warning" >Отменить редактирование</a>
                 </div>
             </div>
             <?php endif; ?>
             </div>
-
+            
             <!--Вывод комментариев с БД-->
             <?php
             
@@ -132,21 +102,21 @@
                 <table border="0" align="center" width="75%" cellpadding="15" bordercolor="Black">
 
                 <?php
-                if ($id_comment == $row["id"]){
+                if ($edit_id == $row["id"]){
                     ?>
 
-                    <td bgcolor='adadad'><?=$row["comment"]?></td><tr>
-
+                    <td bgcolor='#adadad'><?=$row["comment"]?></td><tr>
+                    
                     <?php
                 } else {
                     ?>
 
                     <td bgcolor='white'><?=$row["comment"]?></td><tr>
-
-                   <?php 
+                    
+                    <?php
                 }
                 ?>
-
+                
                 </table>
                 
                 <?php  
@@ -163,7 +133,8 @@
                 <?php 
                 if($user_id2 == $row["user_id"]){
                 //Комментарий данного авторизированого пользователя
-                ?>                  
+                    ?>
+
                     <td bgcolor='#eb8934' align='right'>
                     <a style="color: Black;" href="edit_comment.php?id=<?=$row["id"]?>">Редактировать</a>
                     <a style="color: Black;" href="delete_comment.php?id=<?=$row["id"]?>">Удалить</a>
@@ -172,21 +143,12 @@
                 <?php
                 } else {
                     //Ответить на комментарий
-                    if ($id_comment == $row["id"]){
-                        ?>
+                    ?>
 
-                        <td bgcolor='#25ba48' align='right'>
-                        <a style="color: Black;" href="/comment.php">Отмена</a>
-
-                        <?php
-                    } else {
-                        ?>
-
-                        <td bgcolor='#eb8934' align='right'>
+                    <td bgcolor='#eb8934' align='right'>
                         <a style="color: Black;" href="reply_comment.php?id=<?=$row["id"]?>">Ответить</a>
 
-                        <?php
-                    }
+                <?php
                 }
                 ?>
 
@@ -235,20 +197,47 @@
 
                 </table>
                 <table border="0" align="center" width="67%" cellpadding="15" bordercolor="Black">
-                <td bgcolor='white'><?=$row_reply["reply_comment"]?></td><tr>
+
+                <?php
+                if ($idForEditReplyOnComment == $row_reply["id_reply"]){
+                    ?>
+
+                    <td bgcolor='#adadad'><?=$row_reply["reply_comment"]?></td><tr>
+
+                    <?php
+                } else {
+                    ?>
+                    
+                    <td bgcolor='white'><?=$row_reply["reply_comment"]?></td><tr>
+                    
+                    <?php
+                }
+                ?>
+                    
                 </table>
                 <table border="0" align="center" width="67%" cellpadding="7" bordercolor="Black">
 
                 <?php
                 if($user_id2 == $row_reply["id_reply_user"]){
                 //Комментарий данного авторизированого пользователя
-                ?>
+                    if ($idForEditReplyOnComment == $row_reply["id_reply"]){
+                        ?>
 
-                    <td bgcolor='#eb8934' align='right'>
-                    <a style="color: Black;"  href="editReplyForComment.php?replyOnCommentId=<?=$row_reply["id_reply"]?>">Редактировать</a>
-                    <a style="color: Black;"  href="deleteReplyComment.php?idReplyComment=<?=$row_reply["id_reply"]?>">Удалить</a></td><tr>
-                
-                <?php
+                        <td bgcolor='#bf178a' align='right'>
+                        <a style="color: Black;"  href="/comment.php">Отменить редактирование</a>
+                        <a style="color: Black;"  href="deleteReplyComment.php?idReplyComment=<?=$row_reply["id_reply"]?>">Удалить</a></td><tr>
+
+                        <?php
+                    } else {
+                        ?>
+
+                        <td bgcolor='#eb8934' align='right'>
+                        <a style="color: Black;"  href="editReplyForComment.php?replyOnCommentId=<?=$row_reply["id_reply"]?>">Редактировать</a>
+                        <a style="color: Black;"  href="deleteReplyComment.php?idReplyComment=<?=$row_reply["id_reply"]?>">Удалить</a></td><tr>
+                       
+                       <?php 
+                    }
+
                 } else {
                     //Ответить на комментарий
                     ?>
@@ -307,20 +296,48 @@
                 <!--Комментарий-->
                 </table>
                 <table border="0" align="center" width="60%" cellpadding="15" bordercolor="Black">
-                <td bgcolor='white'><?=$rowSubComment["reply_comment"]?></td><tr>
+                <?php
+                if ($editSubComment == $rowSubComment["id_reply"]){
+                    ?>
+
+                    <td bgcolor='adadad'><?=$rowSubComment["reply_comment"]?></td><tr>
+                
+                <?php
+                } else {
+                    ?>
+
+                    <td bgcolor='white'><?=$rowSubComment["reply_comment"]?></td><tr>
+                
+                <?php
+                }
+                ?>
+                
                 </table>
                 <table border="0" align="center" width="60%" cellpadding="7" bordercolor="Black">
 
                 <?php
                 if($user_id2 == $rowSubComment["id_reply_user"]){
                 //Комментарий данного авторизированого пользователя
-                ?>
+                    ?>
+                    
+                    <?php
+                    if ($editSubComment == $rowSubComment["id_reply"]){
+                        ?>
 
-                    <td bgcolor='#eb8934' align='right'>
-                    <a style="color: Black;"  href="editSubComment.php?editSubComment=<?=$rowSubComment["id_reply"]?>">Редактировать</a>
-                    <a style="color: Black;"  href="deleteSubComment.php?idDeleteSubComment=<?=$rowSubComment["id_reply"]?>">Удалить</a></td><tr>
-                
-                <?php
+                        <td bgcolor='#bf178a' align='right'>
+                        <a style="color: Black;"  href="/comment.php">Отменить редактирование</a>
+                        <a style="color: Black;"  href="deleteSubComment.php?idDeleteSubComment=<?=$rowSubComment["id_reply"]?>">Удалить</a></td><tr>
+
+                        <?php
+                    } else {
+                        ?>
+
+                        <td bgcolor='#eb8934' align='right'>
+                        <a style="color: Black;"  href="editSubComment.php?editSubComment=<?=$rowSubComment["id_reply"]?>">Редактировать</a>
+                        <a style="color: Black;"  href="deleteSubComment.php?idDeleteSubComment=<?=$rowSubComment["id_reply"]?>">Удалить</a></td><tr>
+
+                        <?php
+                    }
                 }
                 ?>
 
