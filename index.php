@@ -4,6 +4,7 @@
 <?php include 'layouts/navbar1.php'; ?>
     <li><a href="kabinet.php">Личный кабинет</a></li>
     <li><a href="comment.php">Комментарии</a></li>
+    <li><a href="parserForUrl.php">Парсинг</a></li>
     <li><a href="reg.php">Зарегистрироваться</a></li>
     <li><a href="" class="current">Войти</a></li>
 <?php include 'layouts/navbar2.php'; ?>
