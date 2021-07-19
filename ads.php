@@ -44,11 +44,12 @@
                     </td>
                     <td bgcolor='white' rowspan="2" width="10%" valign="top"><h3><strong><?=$row["price"]?></strong></h3></td><tr>
                     <?php
+                    $dateAds = date("d m Y",strtotime($row["dates"]));
                     $dateAdsDay = date("d",strtotime($row["dates"]));
                     $dateAdsMonth = date("m",strtotime($row["dates"]));
                     $dateAdsYear = date("Y",strtotime($row["dates"]));
-                    $dateToday = date('d');
-                    if ($dateAdsDay != $dateToday) {
+                    $dateToday = date('d m Y');
+                    if ($dateAds != $dateToday) {
                         $arr = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
                         $dateMonthRus = $arr[$dateAdsMonth - 1];
                         $finalDate = $dateAdsDay . " " . $dateMonthRus . " " . $dateAdsYear;
