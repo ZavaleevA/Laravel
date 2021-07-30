@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июл 26 2021 г., 17:17
+-- Время создания: Июл 30 2021 г., 15:51
 -- Версия сервера: 8.0.19
 -- Версия PHP: 8.0.1
 
@@ -20,6 +20,34 @@ SET time_zone = "+00:00";
 --
 -- База данных: `register-bd-laravel`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` int UNSIGNED NOT NULL,
+  `name` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `user_id` int NOT NULL,
+  `text` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `comments`
+--
+
+INSERT INTO `comments` (`id`, `name`, `user_id`, `text`, `created_at`, `updated_at`) VALUES
+(1, 'Anton', 1, '1 com', '2021-07-30 12:25:20', NULL),
+(2, 'Anton', 1, '2 cldjw', '2021-07-30 12:25:27', NULL),
+(3, 'Anton', 1, '3 qkewhf skahdb kewngb rkeghe, mroeng, iroeruoqwnd, mwoncjbasbczkjoew, pirrirenownqoefoner, pripgnonvenicwiubf, pmienowg. MVlkrrwji wqfhwbvkhber ksankrgerkgbuerig kdshrbewiurgb kwen wkahbfkw msdker.', '2021-07-30 12:26:11', '2021-07-30 14:44:04'),
+(4, 'Boris', 2, '4 xcajwj', '2021-07-30 12:27:40', NULL),
+(5, 'Boris', 2, '5 Bob', '2021-07-30 12:27:46', NULL),
+(6, 'Boris', 2, '6 Merty', '2021-07-30 12:27:56', NULL),
+(7, 'Boris', 2, '7 Vector', '2021-07-30 12:28:06', NULL);
 
 -- --------------------------------------------------------
 
@@ -57,11 +85,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2016_06_01_000001_create_oauth_auth_codes_table', 2),
-(5, '2016_06_01_000002_create_oauth_access_tokens_table', 2),
-(6, '2016_06_01_000003_create_oauth_refresh_tokens_table', 2),
-(7, '2016_06_01_000004_create_oauth_clients_table', 2),
-(8, '2016_06_01_000005_create_oauth_personal_access_clients_table', 2);
+(9, '2016_06_01_000001_create_oauth_auth_codes_table', 2),
+(10, '2016_06_01_000002_create_oauth_access_tokens_table', 2),
+(11, '2016_06_01_000003_create_oauth_refresh_tokens_table', 2),
+(12, '2016_06_01_000004_create_oauth_clients_table', 2),
+(13, '2016_06_01_000005_create_oauth_personal_access_clients_table', 2),
+(14, '2021_07_27_125120_create_comments_table', 2);
 
 -- --------------------------------------------------------
 
@@ -116,14 +145,6 @@ CREATE TABLE `oauth_clients` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Дамп данных таблицы `oauth_clients`
---
-
-INSERT INTO `oauth_clients` (`id`, `user_id`, `name`, `secret`, `provider`, `redirect`, `personal_access_client`, `password_client`, `revoked`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'Laravel Personal Access Client', 'J1oViNhCtQ0f18Ho1uhBlkQUmoGEZIsazcpSnBev', NULL, 'http://localhost', 1, 0, 0, '2021-07-21 06:59:55', '2021-07-21 06:59:55'),
-(2, NULL, 'Laravel Password Grant Client', 'xnVN9PyeP93iv2QIaFpeRA2nlz33MhKAiVEqdzXX', 'users', 'http://localhost', 0, 1, 0, '2021-07-21 06:59:55', '2021-07-21 06:59:55');
-
 -- --------------------------------------------------------
 
 --
@@ -136,13 +157,6 @@ CREATE TABLE `oauth_personal_access_clients` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Дамп данных таблицы `oauth_personal_access_clients`
---
-
-INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `updated_at`) VALUES
-(1, 1, '2021-07-21 06:59:55', '2021-07-21 06:59:55');
 
 -- --------------------------------------------------------
 
@@ -192,12 +206,18 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `avatar`) VALUES
-(1, 'Anton', 'arsentii2278@gmail.com', '2021-07-21 08:28:34', '$2y$10$022O/xgn6oVAzv5J8XIWwu2RMiYieLanOy30feICzBT1WVIOr3qZq', NULL, '2021-07-21 08:28:22', '2021-07-21 08:28:34', NULL),
-(2, 'Boris', 'boris@lar.com', '2021-07-26 10:17:34', '$2y$10$XqofeYD5AnUm4N6YBrupAeyfarmr0UytLxDAoJyhhyvtQ6GmncR76', NULL, '2021-07-26 07:14:02', '2021-07-26 10:17:34', 'http://laravel/public/storage/uploads/76mXM6H2ghrYGgtswHCwIEk8ytRcOrepbYPXEBpt.jpg');
+(1, 'Anton', 'arsentii2278@gmail.com', '2021-07-21 08:28:34', '$2y$10$G6H4VlM2M.JS84xHN9z0OO6ze8y7g/PboSjI8/UjQWPn.8WQSMPPu', NULL, '2021-07-21 08:28:22', '2021-07-21 08:28:34', '/storage/uploads/346bFeqZvVM5jkBMtHIbiHCityjUwhps3piRrV6h.jpg'),
+(2, 'Boris', 'boris@lar.com', '2021-07-26 10:17:34', '$2y$10$u8KedlMko5FZX9ANf1liKeQlWWGFELIvTvxnZsnwgQ.wqNYZU9tEm', NULL, '2021-07-26 07:14:02', '2021-07-26 10:17:34', '/storage/uploads/1nT9rcEKK352t289H6vlz4WOASmEODHiGtM950Xv.jpg');
 
 --
 -- Индексы сохранённых таблиц
 --
+
+--
+-- Индексы таблицы `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `failed_jobs`
@@ -264,6 +284,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT для таблицы `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -273,19 +299,19 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT для таблицы `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT для таблицы `oauth_clients`
 --
 ALTER TABLE `oauth_clients`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `oauth_personal_access_clients`
 --
 ALTER TABLE `oauth_personal_access_clients`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `users`

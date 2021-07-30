@@ -10,9 +10,12 @@ class ImageController extends Controller
 {
     public function upload(Request $reqest)
     {   
+        if (Auth::user()->avatar != NULL){
+            unlink(public_path(Auth::user()->avatar));
+        }
         if ($reqest->file('image') != ''){
             $path = $reqest->file('image')->store('uploads', 'public');
-            $dbPath = asset('/storage') . "/" . $path;
+            $dbPath = "/storage/" . $path;
             DB::table('users')
                 ->where('id', Auth::user()->id)
                 ->update(['avatar' => $dbPath]);     
@@ -28,6 +31,7 @@ class ImageController extends Controller
             DB::table('users')
                 ->where('id', Auth::user()->id)
                 ->update(['avatar' => NULL]);
+            unlink(public_path(Auth::user()->avatar));
         }
         return redirect("home");
     }

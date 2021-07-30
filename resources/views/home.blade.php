@@ -22,7 +22,7 @@
                             $avatar = asset('/storage/uploads/dog.jpg');
                         }
                     ?>
-                    <img style="width: 90%; height: 90%;" src="{{$avatar}}">
+                    <img style="width: 90%; height: 90%;" src="{{asset($avatar)}}">
                     <br><br>
                     <h2>{{Auth::user()->name}}{{ __(', Вы вошли в систему!') }}</h2>  
                 </div>
@@ -38,7 +38,7 @@
                     {{'Форма изменения данных'}}<br>
                     {{'Можно изменить все значения сразу, либо одно'}}
                     </h3>
-                    <form action="validation_form/newUserDate" method="POST">
+                    <form action="{{ route('new-user-date') }}" method="POST">
                         @csrf
                         <textarea class="form-control" name="name" id="name" rows="1">{{Auth::user()->name}}</textarea><br>
                         <input type="password" class="form-control" name="passNew" id="passNew" placeholder="Введите новый пароль"><br>
