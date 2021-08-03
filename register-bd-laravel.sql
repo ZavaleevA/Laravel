@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июл 30 2021 г., 15:51
+-- Время создания: Авг 03 2021 г., 15:03
 -- Версия сервера: 8.0.19
 -- Версия PHP: 8.0.1
 
@@ -29,7 +29,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `comments` (
   `id` int UNSIGNED NOT NULL,
-  `name` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `user_id` int NOT NULL,
   `text` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `created_at` datetime NOT NULL,
@@ -40,14 +39,11 @@ CREATE TABLE `comments` (
 -- Дамп данных таблицы `comments`
 --
 
-INSERT INTO `comments` (`id`, `name`, `user_id`, `text`, `created_at`, `updated_at`) VALUES
-(1, 'Anton', 1, '1 com', '2021-07-30 12:25:20', NULL),
-(2, 'Anton', 1, '2 cldjw', '2021-07-30 12:25:27', NULL),
-(3, 'Anton', 1, '3 qkewhf skahdb kewngb rkeghe, mroeng, iroeruoqwnd, mwoncjbasbczkjoew, pirrirenownqoefoner, pripgnonvenicwiubf, pmienowg. MVlkrrwji wqfhwbvkhber ksankrgerkgbuerig kdshrbewiurgb kwen wkahbfkw msdker.', '2021-07-30 12:26:11', '2021-07-30 14:44:04'),
-(4, 'Boris', 2, '4 xcajwj', '2021-07-30 12:27:40', NULL),
-(5, 'Boris', 2, '5 Bob', '2021-07-30 12:27:46', NULL),
-(6, 'Boris', 2, '6 Merty', '2021-07-30 12:27:56', NULL),
-(7, 'Boris', 2, '7 Vector', '2021-07-30 12:28:06', NULL);
+INSERT INTO `comments` (`id`, `user_id`, `text`, `created_at`, `updated_at`) VALUES
+(1, 1, '1 comment lsdjvr', '2021-08-03 14:57:04', NULL),
+(2, 1, '2 kfdbeq', '2021-08-03 14:57:08', NULL),
+(3, 2, '3 ldbwe kakrw', '2021-08-03 14:57:41', '2021-08-03 14:57:55'),
+(4, 2, '4 dskuf', '2021-08-03 14:57:45', NULL);
 
 -- --------------------------------------------------------
 
@@ -90,7 +86,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (11, '2016_06_01_000003_create_oauth_refresh_tokens_table', 2),
 (12, '2016_06_01_000004_create_oauth_clients_table', 2),
 (13, '2016_06_01_000005_create_oauth_personal_access_clients_table', 2),
-(14, '2021_07_27_125120_create_comments_table', 2);
+(14, '2021_07_27_125120_create_comments_table', 2),
+(15, '2021_08_02_140132_create_sub_comments_table', 3);
 
 -- --------------------------------------------------------
 
@@ -186,6 +183,41 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `sub_comments`
+--
+
+CREATE TABLE `sub_comments` (
+  `id` int UNSIGNED NOT NULL,
+  `text` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `id_comment` int DEFAULT NULL,
+  `id_user` int NOT NULL,
+  `id_sub_comment` int DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `sub_comments`
+--
+
+INSERT INTO `sub_comments` (`id`, `text`, `id_comment`, `id_user`, `id_sub_comment`, `created_at`, `updated_at`) VALUES
+(1, '2/1 l urwgr fw', 2, 2, NULL, '2021-08-03 14:58:04', NULL),
+(2, '1/1 cbjwvyq', 1, 2, NULL, '2021-08-03 14:58:15', NULL),
+(3, '4/1  fldnrbq21ve', 4, 1, NULL, '2021-08-03 14:58:48', NULL),
+(4, '3/1 lsduger', 3, 1, NULL, '2021-08-03 14:58:56', NULL),
+(5, '3/2 ldsugreg RRR', 3, 1, NULL, '2021-08-03 14:59:01', '2021-08-03 14:59:19'),
+(6, '3/3 ldsnuggrczteqxwqpo', 3, 1, NULL, '2021-08-03 14:59:08', NULL),
+(7, '1/1/1 ldueyq wtrdwf', 1, 1, 2, '2021-08-03 14:59:33', NULL),
+(8, '1/1/2 dksyreer TTTa', 1, 1, 2, '2021-08-03 14:59:40', '2021-08-03 14:59:50'),
+(9, '2/1/1 dsour', 2, 1, 1, '2021-08-03 15:00:03', NULL),
+(10, '4/1/1 yewuvbchwe', 4, 2, 3, '2021-08-03 15:00:34', NULL),
+(11, '3/3/1 dsugiergeg', 3, 2, 6, '2021-08-03 15:00:44', NULL),
+(12, '3/3/2 lfdnuiergeh', 3, 2, 6, '2021-08-03 15:00:50', NULL),
+(13, '3/1/1 ldgnure', 3, 2, 4, '2021-08-03 15:01:10', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `users`
 --
 
@@ -206,7 +238,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `avatar`) VALUES
-(1, 'Anton', 'arsentii2278@gmail.com', '2021-07-21 08:28:34', '$2y$10$G6H4VlM2M.JS84xHN9z0OO6ze8y7g/PboSjI8/UjQWPn.8WQSMPPu', NULL, '2021-07-21 08:28:22', '2021-07-21 08:28:34', '/storage/uploads/346bFeqZvVM5jkBMtHIbiHCityjUwhps3piRrV6h.jpg'),
+(1, 'Anton', 'arsentii2278@gmail.com', '2021-07-21 08:28:34', '$2y$10$G6H4VlM2M.JS84xHN9z0OO6ze8y7g/PboSjI8/UjQWPn.8WQSMPPu', NULL, '2021-07-21 08:28:22', '2021-07-21 08:28:34', '/storage/uploads/fdOp3Avuv7kStqJx3QwKHt3wQwadMXUzwngS7vUu.jpg'),
 (2, 'Boris', 'boris@lar.com', '2021-07-26 10:17:34', '$2y$10$u8KedlMko5FZX9ANf1liKeQlWWGFELIvTvxnZsnwgQ.wqNYZU9tEm', NULL, '2021-07-26 07:14:02', '2021-07-26 10:17:34', '/storage/uploads/1nT9rcEKK352t289H6vlz4WOASmEODHiGtM950Xv.jpg');
 
 --
@@ -273,6 +305,12 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
+-- Индексы таблицы `sub_comments`
+--
+ALTER TABLE `sub_comments`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `users`
 --
 ALTER TABLE `users`
@@ -287,7 +325,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `failed_jobs`
@@ -299,7 +337,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT для таблицы `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT для таблицы `oauth_clients`
@@ -312,6 +350,12 @@ ALTER TABLE `oauth_clients`
 --
 ALTER TABLE `oauth_personal_access_clients`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `sub_comments`
+--
+ALTER TABLE `sub_comments`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT для таблицы `users`

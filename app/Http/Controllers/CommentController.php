@@ -12,13 +12,12 @@ class CommentController extends Controller
 {
     public function submit(CommentRequest $req){
         $comment = new Comment();
-        $comment->name = Auth::user()->name;
         $comment->user_id = Auth::user()->id;
         $comment->text = $req->input('comment');
         $comment->created_at = date('Y-m-d H:i:s');
         $comment->updated_at = NULL;
         $comment->save();
-        return redirect("addComment")->with('success', 'Сообщение было добавлено');
+        return redirect("addComment")->with('success', 'Комментарий был добавлен');
     }
 
     public function allData(){
@@ -27,7 +26,8 @@ class CommentController extends Controller
 
     public function deleteComment($id){
         DB::delete('delete from comments where id = ?',[$id]);
-        return redirect()->back()->with('success', 'Сообщение было удалено!');
+        DB::delete('delete from sub_comments where id_comment = ?',[$id]);
+        return redirect()->back()->with('success', 'Комментарий был удален!');
     }
 
     public function dateEditComment($id){
@@ -37,12 +37,12 @@ class CommentController extends Controller
 
     public function editComment(CommentRequest $newText, $id){
         if (($oldText = DB::table('comments')->where('id', $id)->value('text')) != ($updateText = $newText->input('comment'))){
-            DB::table('comments')
+                DB::table('comments')
                 ->where('id',$id)
                 ->update(['text' => $updateText, 'updated_at' => date('Y-m-d H:i:s')]);
-            return redirect()->back()->with('editSuccess', 'Сообщение было отредактировано');
+                return redirect()->back()->with('editSuccess', 'Комментарий отредактирован');
         } else {
-            return redirect()->back()->with('editError', 'Сообщение не изменилось');
+            return redirect()->back()->with('editError', 'Комментарий не изменился');
         }
         
     }
