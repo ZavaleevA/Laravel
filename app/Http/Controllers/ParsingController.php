@@ -26,11 +26,9 @@ class ParsingController extends Controller
             $html = file_get_contents($element['href']);
             $crawlerPage = new Crawler(null, $element['href']);
             $crawlerPage->addHtmlContent($html, 'UTF-8');
-
             $hrefPhoto = $crawlerPage->filter('img[class="css-1bmvjcs"]')->attr('src');
-            $title = $crawlerPage->filter('h1[class="css-1oarkq2-Text eu5v0x0"]')->text();
-            $price = $crawlerPage->filter('h3[class="css-8kqr5l-Text eu5v0x0"]')->text();
-
+            $title = $crawlerPage->filter('h1')->text();
+            $price = $crawlerPage->filter('h3')->text();
             $textАttributeP = $crawlerPage->filter('p[class="css-xl6fe0-Text eu5v0x0"]')->each(function ($node){
                 $attributeP = $node->text();
                 return compact('attributeP');
@@ -99,7 +97,7 @@ class ParsingController extends Controller
     }
 
     public function allDataParsing(){
-        return view('ads', ['data' => Parsing::all()]);
+        return view('ads', ['data' => Parsing::all()->sortByDesc("dates")]);
     }
 
     public function dateAds($id){
