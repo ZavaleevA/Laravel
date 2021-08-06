@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Авг 03 2021 г., 15:03
+-- Время создания: Авг 06 2021 г., 17:36
 -- Версия сервера: 8.0.19
 -- Версия PHP: 8.0.1
 
@@ -53,11 +53,11 @@ INSERT INTO `comments` (`id`, `user_id`, `text`, `created_at`, `updated_at`) VAL
 
 CREATE TABLE `failed_jobs` (
   `id` bigint UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -69,7 +69,7 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `migrations` (
   `id` int UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -87,7 +87,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (12, '2016_06_01_000004_create_oauth_clients_table', 2),
 (13, '2016_06_01_000005_create_oauth_personal_access_clients_table', 2),
 (14, '2021_07_27_125120_create_comments_table', 2),
-(15, '2021_08_02_140132_create_sub_comments_table', 3);
+(15, '2021_08_02_140132_create_sub_comments_table', 3),
+(17, '2021_08_03_160733_create_parsings_table', 4);
 
 -- --------------------------------------------------------
 
@@ -96,11 +97,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `oauth_access_tokens` (
-  `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL,
   `client_id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `scopes` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `scopes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `revoked` tinyint(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -114,10 +115,10 @@ CREATE TABLE `oauth_access_tokens` (
 --
 
 CREATE TABLE `oauth_auth_codes` (
-  `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
   `client_id` bigint UNSIGNED NOT NULL,
-  `scopes` text COLLATE utf8mb4_unicode_ci,
+  `scopes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `revoked` tinyint(1) NOT NULL,
   `expires_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -131,10 +132,10 @@ CREATE TABLE `oauth_auth_codes` (
 CREATE TABLE `oauth_clients` (
   `id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `secret` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `provider` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `redirect` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `secret` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `provider` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `redirect` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `personal_access_client` tinyint(1) NOT NULL,
   `password_client` tinyint(1) NOT NULL,
   `revoked` tinyint(1) NOT NULL,
@@ -162,11 +163,49 @@ CREATE TABLE `oauth_personal_access_clients` (
 --
 
 CREATE TABLE `oauth_refresh_tokens` (
-  `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `access_token_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `access_token_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `revoked` tinyint(1) NOT NULL,
   `expires_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `parsings`
+--
+
+CREATE TABLE `parsings` (
+  `id` int UNSIGNED NOT NULL,
+  `url_ads` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `url_image` text CHARACTER SET utf8 COLLATE utf8_general_ci,
+  `title_name` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `price` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `year` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `type_of_fuel` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `mileage` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `description` text CHARACTER SET utf8 COLLATE utf8_general_ci,
+  `dates` date DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `parsings`
+--
+
+INSERT INTO `parsings` (`id`, `url_ads`, `url_image`, `title_name`, `price`, `year`, `type_of_fuel`, `mileage`, `description`, `dates`, `updated_at`, `created_at`) VALUES
+(1, 'https://www.olx.ua/d/obyavlenie/daewoo-lanos-1-4-IDMh7BH.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/oxng8jyhp3rs2-UA/image;s=1200x1600', 'Daewoo lanos 1.4', '1 600 $', 'Год выпуска: 2008', 'Вид топлива: Газ / бензин', 'Пробег: 450 км', 'Требует замены передних крыльев, и задней двери. По всем вопросам в вайбер. Ходовая сделана месяц назад. Срочно, торг', '2021-08-06', NULL, '2021-08-06 16:44:41'),
+(2, 'https://www.olx.ua/d/obyavlenie/avtomobl-daewoo-lanos-IDMmBRs.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/8g1sxik2tped1-UA/image;s=1600x1200', 'Автомобіль Daewoo Ланос', '3 800 $', 'Год выпуска: 2008', 'Вид топлива: Бензин', 'Пробег: 81 000 км', 'Авто 2008 року в ідеальному стані двигун 1,4,КПП Опель, проведено заміну усіх розхідних матеріалів,авто повністю оброблено від корозії,салон чистий та доглянутий, оригінальний пробіг 81 000 км.Прохання перекупникам не турбувати.', '2021-08-05', NULL, '2021-08-06 16:44:42'),
+(3, 'https://www.olx.ua/d/obyavlenie/daewoo-lanos-2011-IDKohWN.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/mfnj9lafu2f41-UA/image;s=750x1000', 'Daewoo lanos 2011', '2 800 $', 'Год выпуска: 2011', 'Вид топлива: Бензин', 'Пробег: 81 000 км', 'Автомобиль в рабочем состоянии, мотор не дымит, газ не стоял, требует косметического ремонта кузова. Все вопросы по телефону 09******92', '2021-08-05', NULL, '2021-08-06 16:44:43'),
+(4, 'https://www.olx.ua/d/obyavlenie/prodam-deo-lanos-2011-goda-v-otlichnom-sost-IDMm9I2.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/pd30jajb89mq3-UA/image;s=1000x750', 'Продам Део Ланос 2011 года в отличном сост.', '2 700 $', 'Год выпуска: 2011', 'Вид топлива: Бензин', 'Пробег: 140 000 км', 'Продам Ланос 2011 года в отличном сост, кузов не бит, не ржавый, мотор 1. 5 не дымит, масла не ест, ходовая и коробка в порядке, гидроусилитель руля. Электрика исправна. По документам любой вид оформления, торг у капота.', '2021-08-04', NULL, '2021-08-06 16:44:45'),
+(5, 'https://www.olx.ua/d/obyavlenie/lanos-lanos-deu-prodam-IDHj13p.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/6bo7q7tg6slm2-UA/image;s=1376x1032', 'Lanos Ланос деу продам', '4 600 $', 'Год выпуска: 2013', 'Вид топлива: Бензин', 'Пробег: 55 000 км', 'Машина в супер состоянии, без подкрасов и т.п. . Кузов в идеале , двигатель и коробка опель . Пробег родной любые проверки .Салон как новый . Вложений не требует . Только переоформление . Газа нет и не было. Без торга!', '2021-07-28', NULL, '2021-08-06 16:44:46'),
+(6, 'https://www.olx.ua/d/obyavlenie/prodam-daewoo-lanos-IDLEBuk.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/gju0x16vkhmm2-UA/image;s=1062x1416', 'Продам Daewoo Lanos', '2 800 $', 'Год выпуска: 2011', 'Вид топлива: Бензин', 'Пробег: 140 000 км', 'Продам Део Ланос, новая резина, гидроуселитель руля, есть нюансы по кузову все вопросы по тел.', '2021-07-22', NULL, '2021-08-06 16:44:47'),
+(7, 'https://www.olx.ua/d/obyavlenie/prodam-deo-lanos-lanos-IDJQt6o.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/a3fmvir0jgcc3-UA/image;s=1745x1560', 'Продам Део Ланос Lanos', '3 500 $', 'Год выпуска: 2011', 'Вид топлива: Газ / бензин', 'Пробег: 69 000 км', 'Продам Ланос 2011, гидроусилитеть, электростеклоподъемники, новый АКБ, хорошая резина. Без рыжиков, гнили, подкасов и тому подобное. пробег реальный, газ 4 поколение пропан. Ланос состояние идеал 5/5, Продаю по ТП *Возможен обмен на бляху в достойном состоянии под растаможку', '2021-07-19', NULL, '2021-08-06 16:44:48'),
+(8, 'https://www.olx.ua/d/obyavlenie/prodam-lanos-1-6-16v-IDLV7zl.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/3u51zb2mve6i2-UA/image;s=1040x780', 'Продам Lanos 1.6 16V', '3 700 $', 'Год выпуска: 2009', 'Вид топлива: Газ / бензин', 'Пробег: 132 000 км', 'Отличное состояние. Кузов без дтп, без ржавчины.Газ евро4. Гидроусилитель руля. Мотор 1.6 16клапаный ра ботает отлично как на газу так и на бензине. Ухоженый салончик', '2021-07-19', NULL, '2021-08-06 16:44:50'),
+(9, 'https://www.olx.ua/d/obyavlenie/lanos-lanos-1-5-deu-IDKywYT.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/c2nlfzq9sezn1-UA/image;s=1077x811', 'Lanos Ланос 1.5 деу', '4 500 $', 'Год выпуска: 2013', 'Вид топлива: Бензин', 'Пробег: 52 000 км', 'Авто в отличном состоянии, без подкрасов , пробег родной - все видно по машине , газа нет и не было . Магнитола, стеклоподъёмники, двухсторонняя сигнализация. Только переоформление Без торга совсем .', '2021-07-17', NULL, '2021-08-06 16:44:51'),
+(10, 'https://www.olx.ua/d/obyavlenie/avtomobil-deo-sens-2011-IDLknjv.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/x19z0vqsuyd21-UA/image;s=1000x750', 'Автомобиль Део Сенс 2011', '3 200 $', 'Год выпуска: 2011', 'Вид топлива: Бензин', 'Пробег: 146 000 км', 'Део Сенс 2011г. Бензин.Пробег 146000. Машина на ходу, серьезных вложений не требует.', '2021-07-14', NULL, '2021-08-06 16:44:52'),
+(11, 'https://www.olx.ua/d/obyavlenie/deo-lanos-daewoo-lanos-IDLSbUw.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/j8wq5ntyvysk-UA/image;s=1600x1200', 'Део Ланос Daewoo Lanos', '3 500 $', 'Год выпуска: 2011', 'Вид топлива: Газ / бензин', 'Пробег: 69 000 км', 'Продам Ланос, 2011, двигатель 1,5, гидроусилитель, стеклоподъемники, кондиционер заправлен, хорошая резина, тонировка. Кузов без рыжиков, гнили, подкасов и тому подобное. пробег реальный, газ 4 поколение пропан. Ланос состояние идеал 5/5, полностью обслужена, без вложений. Продаю по ТП Возможен обмен на бляху в таком же состоянии под растаможку', '2021-07-09', NULL, '2021-08-06 16:44:53');
 
 -- --------------------------------------------------------
 
@@ -175,8 +214,8 @@ CREATE TABLE `oauth_refresh_tokens` (
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -223,11 +262,11 @@ INSERT INTO `sub_comments` (`id`, `text`, `id_comment`, `id_user`, `id_sub_comme
 
 CREATE TABLE `users` (
   `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `avatar` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
@@ -299,6 +338,12 @@ ALTER TABLE `oauth_refresh_tokens`
   ADD KEY `oauth_refresh_tokens_access_token_id_index` (`access_token_id`);
 
 --
+-- Индексы таблицы `parsings`
+--
+ALTER TABLE `parsings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `password_resets`
 --
 ALTER TABLE `password_resets`
@@ -337,7 +382,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT для таблицы `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT для таблицы `oauth_clients`
@@ -350,6 +395,12 @@ ALTER TABLE `oauth_clients`
 --
 ALTER TABLE `oauth_personal_access_clients`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `parsings`
+--
+ALTER TABLE `parsings`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT для таблицы `sub_comments`

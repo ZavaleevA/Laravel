@@ -29,6 +29,14 @@ Route::get('/comments', function () {
     return view('comments');
 })->name('comments');
 
+Route::get('/parsing', function () {
+    return view('parsing');
+})->name('parsing');
+
+Route::get('/ads', function () {
+    return view('ads');
+})->name('ads');
+
 Route::get('/newUserDate', function () {
     return view('newUserDate');
 })->name('newUserDate');
@@ -44,6 +52,16 @@ Route::get('/editSubComment', function () {
 Route::get('/replyToSubComment', function () {
     return view('replyToSubComment');
 })->name('replyToSubComment');
+
+Route::get('/individualAds', function () {
+    return view('individualAds');
+})->name('individualAds');
+
+Route::get('/parsing/allDataParsing', 'ParsingController@allDataParsing')->name('all-data-parsing');
+
+Route::get('/parsing/dateAds/{id}', 'ParsingController@dateAds')->name('date-ads');
+
+Route::post('/parsing/newParsing', 'ParsingController@newParsing')->name('new-parsing');
 
 Route::post('/newUserDate/new', 'NewUserDateController@new')->name('new-user-date');
 
