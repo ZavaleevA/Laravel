@@ -90,7 +90,11 @@ class ParsingController extends Controller
             $parsing->description = $description;
             $parsing->dates = $finalDate;
             $parsing->updated_at = NULL;
+<<<<<<< HEAD
             $parsing->created_at = date('Y-m-d H:i:s');
+=======
+            $parsing->created_at = date('Y-m-d H:i:s');;
+>>>>>>> 5b9de7c81f13a8a830709d6d5600b81318a874c5
             $parsing->save();
         }
         return redirect()->back()->with('success', 'Парсинг прошел успешно!');
@@ -104,6 +108,7 @@ class ParsingController extends Controller
         $parsing = new Parsing();
         return view('individualAds', ['data' => [$parsing->find($id)]]);
     } 
+<<<<<<< HEAD
 
     public function updateParsing(){
         $url = 'https://www.olx.ua/transport/legkovye-avtomobili/daewoo/lanos-sens/kremenchug/?search%5Bfilter_float_motor_year%3Afrom%5D=2008';
@@ -210,4 +215,6 @@ class ParsingController extends Controller
             return redirect()->back()->with('success', 'Обновление прошло успешно! ✅ Новых объявлений добавлено: ' . $newAds . '! ✅');
         }       
     }
+=======
+>>>>>>> 5b9de7c81f13a8a830709d6d5600b81318a874c5
 }

@@ -63,12 +63,16 @@ Route::get('/parsing/dateAds/{id}', 'ParsingController@dateAds')->name('date-ads
 
 Route::post('/parsing/newParsing', 'ParsingController@newParsing')->name('new-parsing');
 
+<<<<<<< HEAD
 Route::get('/parsing/updateParsing', 'ParsingController@updateParsing')->name('update-parsing');
 
+=======
+>>>>>>> 5b9de7c81f13a8a830709d6d5600b81318a874c5
 Route::post('/newUserDate/new', 'NewUserDateController@new')->name('new-user-date');
 
 Route::get('/comment/delete/{id}', 'CommentController@deleteComment')->name('comment-delete');
 
+<<<<<<< HEAD
 Route::get('/commentAds/delete/{id}', 'CommentAdsController@deleteCommentAds')->name('comment-ads-delete');
 
 Route::get('/comment/dateEditComment/{id}', 'CommentController@dateEditComment')->name('comment-date-edit');
@@ -115,12 +119,39 @@ Route::post('/comment/editComment/{id}', 'CommentController@editComment')->name(
 
 Route::post('/commentAds/editCommentAds/{id}', 'CommentAdsController@editCommentAds')->name('comment-ads-edit');
 
+=======
+Route::get('/comment/dateEditComment/{id}', 'CommentController@dateEditComment')->name('comment-date-edit');
+
+Route::get('/subComment/newSubComment/{id}', 'SubCommentController@newSubComment')->name('new-sub-comment');
+
+Route::get('/subComment/deleteSubComment/{id}', 'SubCommentController@deleteSubComment')->name('delete-sub-comment');
+
+Route::get('/subComment/dateEditSubComment/{id}', 'SubCommentController@dateEditSubComment')->name('date-edit-sub-comment');
+
+Route::post('/subComment/editSubComment/{id}', 'SubCommentController@editSubComment')->name('edit-sub-comment');
+
+Route::get('/subComment/dateSubComment/{id}', 'SubCommentController@dateSubComment')->name('date-sub-comment');
+
+Route::get('/subComment/deleteReplySubComment/{id}', 'SubCommentController@deleteReplySubComment')->name('delete-reply-sub-comment');
+
+Route::get('/subComment/dateReplySubComment/{id}', 'SubCommentController@dateReplySubComment')->name('date-reply-sub-comment');
+
+Route::post('/subComment/addReplySubComment/{id}', 'SubCommentController@addReplySubComment')->name('add-reply-sub-comment');
+
+Route::post('/subComment/addSubComment/{id}', 'SubCommentController@addSubComment')->name('add-sub-comment');
+
+Route::post('/comment/editComment/{id}', 'CommentController@editComment')->name('comment-edit');
+
+>>>>>>> 5b9de7c81f13a8a830709d6d5600b81318a874c5
 Route::get('/comment/all', 'CommentController@allData')->name('comment-data');
 
 Route::post('/comment/submit', 'CommentController@submit')->name('comment-form');
 
+<<<<<<< HEAD
 Route::post('/commentAds/addCommentAds/{id}', 'CommentAdsController@addCommentAds')->name('add-comment-ads');
 
+=======
+>>>>>>> 5b9de7c81f13a8a830709d6d5600b81318a874c5
 Route::post('/image/upload', 'ImageController@upload')->name('image.upload');
 
 Route::get('/image/delete', 'ImageController@delete')->name('image.delete');

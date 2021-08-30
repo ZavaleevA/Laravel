@@ -18,11 +18,14 @@
             {{session('success')}}
         </div>
     @endif
+<<<<<<< HEAD
     @if (session('primary'))
         <div class="alert alert-primary">
             {{session('primary')}}
         </div>
     @endif 
+=======
+>>>>>>> 5b9de7c81f13a8a830709d6d5600b81318a874c5
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -33,7 +36,10 @@
                         @csrf
                         <textarea class="form-control" name="url" id="url" rows="2" placeholder="Ваша ссылка"></textarea><br>
                         <button class="btn btn-success" type="submit">Парсить</button>
+<<<<<<< HEAD
                         <a href="{{ route('update-parsing') }}" class="btn btn-warning" type="submit">Обновить</a>
+=======
+>>>>>>> 5b9de7c81f13a8a830709d6d5600b81318a874c5
                     </form>  
                 </div>
             </div>

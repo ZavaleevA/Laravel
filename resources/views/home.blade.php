@@ -7,6 +7,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+<<<<<<< HEAD
+=======
+                <div class="card-header">{{ __('Dashboard') }}</div>
+>>>>>>> 5b9de7c81f13a8a830709d6d5600b81318a874c5
 
                 <div class="card-body" align="center">
                     @if (session('status'))
