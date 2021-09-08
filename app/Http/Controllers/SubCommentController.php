@@ -78,11 +78,7 @@ class SubCommentController extends Controller
     public function deleteReplySubComment($id){
             DB::delete('delete from sub_comments where id = ?',[$id]);
         return redirect()->back()->with('success', 'Комментарий удален');
-<<<<<<< HEAD
     }
-=======
-    } 
->>>>>>> 5b9de7c81f13a8a830709d6d5600b81318a874c5
 
     public function dateReplySubComment($id){
         $subComment = new SubComment;

@@ -28,7 +28,14 @@ class ParsingController extends Controller
             $crawlerPage->addHtmlContent($html, 'UTF-8');
             $hrefPhoto = $crawlerPage->filter('img[class="css-1bmvjcs"]')->attr('src');
             $title = $crawlerPage->filter('h1')->text();
-            $price = $crawlerPage->filter('h3')->text();
+            $priceWithDollar = $crawlerPage->filter('h3')->text();
+            $price = stristr($priceWithDollar, ' $', true);
+            if($posSpace = strpos($price, ' ')){
+                $priceFirst = stristr($price, ' ', true);
+                $priceSecond = substr($price, $posSpace + 1, );
+                $price = $priceFirst . $priceSecond;
+            }    
+
             $textАttributeP = $crawlerPage->filter('p[class="css-xl6fe0-Text eu5v0x0"]')->each(function ($node){
                 $attributeP = $node->text();
                 return compact('attributeP');
@@ -36,11 +43,24 @@ class ParsingController extends Controller
 
             foreach($textАttributeP as $elementАttributeP) {
                  if (stristr($elementАttributeP['attributeP'], 'Год выпуска') == true){
-                    $textYear = $elementАttributeP['attributeP'];                  
+                    $textAndYear = $elementАttributeP['attributeP'];
+                    $posYear = strpos($textAndYear, ':');
+                    $textYear = substr($textAndYear, $posYear + 2, 5); 
                 } elseif (stristr($elementАttributeP['attributeP'], 'Вид топлива') == true){
-                    $textTypeOfFuel = $elementАttributeP['attributeP'];                
+                    $textAndTypeOfFuel = $elementАttributeP['attributeP'];
+                    $posTypeOfFuel = strpos($textAndTypeOfFuel, ':');
+                    $textTypeOfFuel = substr($textAndTypeOfFuel, $posTypeOfFuel + 2, );                
                 } elseif (stristr($elementАttributeP['attributeP'], 'Пробег') == true){
-                    $textMileage = $elementАttributeP['attributeP'];  
+                    $textAndMileage = $elementАttributeP['attributeP'];
+                    $posMileage = strpos($textAndMileage, ':');
+                    $textMileageAndKM = substr($textAndMileage, $posMileage + 2, );
+                    $posKM = strpos($textMileageAndKM, 'к'); 
+                    $textMileage = substr($textMileageAndKM, 0, $posKM - 1);
+                    if($posSpace = strpos($textMileage, ' ')){
+                        $mileageFirst = stristr($textMileage, ' ', true);
+                        $mileageSecond = substr($textMileage, $posSpace + 1, );
+                        $textMileage = $mileageFirst . $mileageSecond;
+                    }
                 }
             }
             
@@ -90,25 +110,21 @@ class ParsingController extends Controller
             $parsing->description = $description;
             $parsing->dates = $finalDate;
             $parsing->updated_at = NULL;
-<<<<<<< HEAD
             $parsing->created_at = date('Y-m-d H:i:s');
-=======
-            $parsing->created_at = date('Y-m-d H:i:s');;
->>>>>>> 5b9de7c81f13a8a830709d6d5600b81318a874c5
             $parsing->save();
         }
         return redirect()->back()->with('success', 'Парсинг прошел успешно!');
     }
 
     public function allDataParsing(){
-        return view('ads', ['data' => Parsing::all()->sortByDesc("dates")]);
+        $parsing = Parsing::orderBy('dates', 'DESC')->paginate(5);
+        return view('ads', ['data' => $parsing]);
     }
 
     public function dateAds($id){
         $parsing = new Parsing();
         return view('individualAds', ['data' => [$parsing->find($id)]]);
     } 
-<<<<<<< HEAD
 
     public function updateParsing(){
         $url = 'https://www.olx.ua/transport/legkovye-avtomobili/daewoo/lanos-sens/kremenchug/?search%5Bfilter_float_motor_year%3Afrom%5D=2008';
@@ -215,6 +231,168 @@ class ParsingController extends Controller
             return redirect()->back()->with('success', 'Обновление прошло успешно! ✅ Новых объявлений добавлено: ' . $newAds . '! ✅');
         }       
     }
-=======
->>>>>>> 5b9de7c81f13a8a830709d6d5600b81318a874c5
+
+    public function filterAds(Request $fullInfo){
+        $parsing = Parsing::orderBy('dates', 'DESC');
+        if ($priceFrom = $fullInfo->priceFrom) {
+            switch($priceFrom) {
+                case 1:
+                    $parsing = $parsing->where('price', '>=', '1000');
+                    break;
+                case 2:
+                    $parsing = $parsing->where('price', '>=', '2000');
+                    break;
+                case 3:
+                    $parsing = $parsing->where('price', '>=', '3000');
+                    break;
+                case 4:
+                    $parsing = $parsing->where('price', '>=', '4000');
+                    break;
+            } 
+        }
+        
+        if ($priceBefore = $fullInfo->priceBefore) {
+            switch($priceBefore) {
+                case 1:
+                    $parsing = $parsing->where('price', '<=', '1000');
+                    break;
+                case 2:
+                    $parsing = $parsing->where('price', '<=', '2000');
+                    break;
+                case 3:
+                    $parsing = $parsing->where('price', '<=', '3000');
+                    break;
+                case 4:
+                    $parsing = $parsing->where('price', '<=', '4000');
+                    break;
+            } 
+        }
+        
+        if ($yearFrom = $fullInfo->yearFrom) {
+            switch($yearFrom) {
+                case 1:
+                    $parsing = $parsing->where('year', '>=', '2000');
+                    break;
+                case 2:
+                    $parsing = $parsing->where('year', '>=', '2005');
+                    break;
+                case 3:
+                    $parsing = $parsing->where('year', '>=', '2010');
+                    break;
+                case 4:
+                    $parsing = $parsing->where('year', '>=', '2015');
+                    break;
+            } 
+        }
+        
+        if ($yearBefore = $fullInfo->yearBefore) {
+            switch($yearBefore) {
+                case 1:
+                    $parsing = $parsing->where('year', '<=', '2000');
+                    break;
+                case 2:
+                    $parsing = $parsing->where('year', '<=', '2005');
+                    break;
+                case 3:
+                    $parsing = $parsing->where('year', '<=', '2010');
+                    break;
+                case 4:
+                    $parsing = $parsing->where('year', '<=', '2015');
+                    break;
+            } 
+        }
+        
+        if ($mileageFrom = $fullInfo->mileageFrom) {
+            switch($mileageFrom) {
+                case 1:
+                    $parsing = $parsing->where('mileage', '>=', '50000');
+                    break;
+                case 2:
+                    $parsing = $parsing->where('mileage', '>=', '100000');
+                    break;
+                case 3:
+                    $parsing = $parsing->where('mileage', '>=', '150000');
+                    break;
+                case 4:
+                    $parsing = $parsing->where('mileage', '>=', '200000');
+                    break;
+            } 
+        }
+        
+        if ($mileageBefore = $fullInfo->mileageBefore) {
+            switch($mileageBefore) {
+                case 1:
+                    $parsing = $parsing->where('mileage', '<=', '100000');
+                    break;
+                case 2:
+                    $parsing = $parsing->where('mileage', '<=', '150000');
+                    break;
+                case 3:
+                    $parsing = $parsing->where('mileage', '<=', '200000');
+                    break;
+                case 4:
+                    $parsing = $parsing->where('mileage', '<=', '250000');
+                    break;
+            } 
+        }
+        
+        if ($fuel = $fullInfo->fuel) {
+            switch($fuel) {
+                case 1:
+                    $parsing = $parsing->where('type_of_fuel', '=', 'Бензин');
+                    break;
+                case 2:
+                    $parsing = $parsing->where('type_of_fuel', '=', 'Дизель');
+                    break;
+                case 3:
+                    $parsing = $parsing->where('type_of_fuel', '=', 'Газ / бензин');
+                    break;
+                case 4:
+                    $parsing = $parsing->where('type_of_fuel', '=', 'Электро');
+                    break;
+            } 
+        }
+        
+        $today = date("Y-m-d");
+        $yesterday = date("Y-m-d", strtotime( "- 1 day" ));
+        $lastWeek = date("Y-m-d", strtotime( "- 7 day" ));
+        $lastMonth = date("Y-m-d", strtotime( "- 1 month" ));
+        if ($publicatedFrom = $fullInfo->publicatedFrom) {
+            switch($publicatedFrom) {
+                case 1:
+                    $parsing = $parsing->where('dates', '>=', $today);
+                    break;
+                case 2:
+                    $parsing = $parsing->where('dates', '>=', $yesterday);
+                    break;
+                case 3:
+                    $parsing = $parsing->where('dates', '>=', $lastWeek);
+                    break;
+                case 4:
+                    $parsing = $parsing->where('dates', '>=', $lastMonth);
+                    break;
+            } 
+        }
+        if ($publicatedBefore = $fullInfo->publicatedBefore) {
+            switch($publicatedBefore) {
+                case 1:
+                    $parsing = $parsing->where('dates', '<=', $today);
+                    break;
+                case 2:
+                    $parsing = $parsing->where('dates', '<=', $yesterday);
+                    break;
+                case 3:
+                    $parsing = $parsing->where('dates', '<=', $lastWeek);
+                    break;
+                case 4:
+                    $parsing = $parsing->where('dates', '<=', $lastMonth);
+                    break;
+            } 
+        }
+        if ($searchByTitle = $fullInfo->searchByTitle) {
+            $parsing = $parsing->where('title_name', '=', $searchByTitle);
+        }
+        $parsing = $parsing->paginate(5);
+        return view('ads', ['data' => $parsing]);
+    } 
 }

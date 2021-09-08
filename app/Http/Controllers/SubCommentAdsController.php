@@ -8,6 +8,7 @@ use App\Models\SubCommentAds;
 use App\Models\CommentAds;
 use \DB;
 use \Auth;
+//use Mail;
 
 class SubCommentAdsController extends Controller
 {
@@ -21,6 +22,10 @@ class SubCommentAdsController extends Controller
         if(($sub_comment_ads->text = $req->input('newSubComment')) == ''){
             return redirect()->back()->with('errorSubComment', 'Ответ на комментарий не был добавлен');
         } else {
+            /*Mail::send(['text' => 'mailReplyToComment'], ['name', 'Weee'], function($message){
+                $message->to('zavaleev.sbase@gmail.com', 'Tjytghj')->subject('Test mail');
+                $message->from('zavaleev.sbase@gmail.com', 'NVrnegeo');
+            });*/
             $sub_comment_ads->text = $req->input('newSubComment');
             $sub_comment_ads->id_comment = $id;
             $sub_comment_ads->id_user = Auth::user()->id;

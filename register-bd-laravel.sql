@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Авг 30 2021 г., 21:16
+-- Время создания: Сен 08 2021 г., 11:18
 -- Версия сервера: 8.0.19
 -- Версия PHP: 8.0.1
 
@@ -215,10 +215,10 @@ CREATE TABLE `parsings` (
   `url_ads` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `url_image` text CHARACTER SET utf8 COLLATE utf8_general_ci,
   `title_name` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `price` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `year` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `price` bigint DEFAULT NULL,
+  `year` bigint DEFAULT NULL,
   `type_of_fuel` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `mileage` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `mileage` bigint DEFAULT NULL,
   `description` text CHARACTER SET utf8 COLLATE utf8_general_ci,
   `dates` date DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
@@ -230,15 +230,12 @@ CREATE TABLE `parsings` (
 --
 
 INSERT INTO `parsings` (`id`, `url_ads`, `url_image`, `title_name`, `price`, `year`, `type_of_fuel`, `mileage`, `description`, `dates`, `updated_at`, `created_at`) VALUES
-(1, 'https://www.olx.ua/d/obyavlenie/prodam-daewoo-lanos-IDMy5IM.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/qtj9z7c7gp4k-UA/image;s=1000x750', 'Продам Daewoo Lanos', '4 200 $', 'Год выпуска: 2009', 'Вид топлива: Бензин', 'Пробег: 115 000 км', 'Продам Daewoo Lanos в отличном состоянии ,на сиденьях надеты чехлы,по машинке ничего делать не нужно.В подарок отдам комплект зимней резины на дисках,резиновые коврики ,новые противотуманки .Все вопросы по телефону', '2021-08-26', NULL, '2021-08-26 14:33:20'),
-(2, 'https://www.olx.ua/d/obyavlenie/prodayu-lanos-IDMxUdf.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/s1494lu764td-UA/image;s=1000x750', 'Продаю ланос', '2 600 $', 'Год выпуска: 2008', 'Вид топлива: Газ / бензин', 'Пробег: 162 000 км', 'Продам Лагос 1.4 2008 года Пробег 162000 родной пробег Масла не берет ходовая в норме Заменена рулевая рейка Поменяны колодки новый акб Двух сторонняя сигнализация Два брелка два родных ключа Хорошая акустика Машинка на газу 2 поколение Стоит би ксенон Хорошая резина. Продажа только с переоформлением . Машина находиться в г Кременчуг 09******27', '2021-08-25', NULL, '2021-08-26 14:33:21'),
-(3, 'https://www.olx.ua/d/obyavlenie/lanos-na-otlichnom-hodu-IDMxmmE.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/2y2avx1esvz9-UA/image;s=2000x1500', 'Ланос на отличном ходу', '2 300 $', 'Год выпуска: 2008', 'Вид топлива: Газ / бензин', 'Пробег: 215 000 км', 'Срочно продам Ланос 2008 года. В хорошем техническом состоянии.Перебрана передняя подвеска.Автомобиль едет очень уверенно. Есть газ, вписан в документы.Местами притертости по кузову,ничего критичного. Магнитола с флешкой и громкой связью.Гидроусилитель руля.Документы в полном порядке.Не большой расход. Отличный вариант для начинающего водителя.Хороший торг у капота.', '2021-08-24', NULL, '2021-08-26 14:33:22'),
-(4, 'https://www.olx.ua/d/obyavlenie/avtomobil-deo-sens-2011-IDLknjv.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/x19z0vqsuyd21-UA/image;s=1000x750', 'Автомобиль Део Сенс 2011', '3 000 $', 'Год выпуска: 2011', 'Вид топлива: Бензин', 'Пробег: 146 000 км', 'Део Сенс 2011г. Бензин.Пробег 146000. Машина на ходу, серьезных вложений не требует.', '2021-08-23', NULL, '2021-08-26 14:33:23'),
-(5, 'https://www.olx.ua/d/obyavlenie/prodam-daewoo-lanos-IDLEBuk.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/gju0x16vkhmm2-UA/image;s=1062x1416', 'Продам Daewoo Lanos', '2 550 $', 'Год выпуска: 2011', 'Вид топлива: Бензин', 'Пробег: 140 000 км', 'Продам Део Ланос, новая резина, гидроуселитель руля, есть нюансы по кузову все вопросы по тел.', '2021-08-21', NULL, '2021-08-26 14:33:23'),
-(6, 'https://www.olx.ua/d/obyavlenie/lanos-lanos-1-5-deu-IDKywYT.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/c2nlfzq9sezn1-UA/image;s=1077x811', 'Lanos Ланос 1.5 деу', '4 500 $', 'Год выпуска: 2013', 'Вид топлива: Бензин', 'Пробег: 52 000 км', 'Авто в отличном состоянии, без подкрасов , пробег родной - все видно по машине , газа нет и не было . Магнитола, стеклоподъёмники, двухсторонняя сигнализация. Только переоформление Без торга совсем .', '2021-08-13', NULL, '2021-08-26 14:33:24'),
-(7, 'https://www.olx.ua/d/obyavlenie/deo-lanos-daewoo-lanos-IDLSbUw.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/j8wq5ntyvysk-UA/image;s=1600x1200', 'Део Ланос Daewoo Lanos', '3 500 $', 'Год выпуска: 2011', 'Вид топлива: Газ / бензин', 'Пробег: 69 000 км', 'Продам Ланос, 2011, двигатель 1,5, гидроусилитель, стеклоподъемники, кондиционер заправлен, хорошая резина, тонировка. Кузов без рыжиков, гнили, подкасов и тому подобное. пробег реальный, газ 4 поколение пропан. Ланос состояние идеал 5/5, полностью обслужена, без вложений. Продаю по ТП Возможен обмен на бляху в таком же состоянии под растаможку', '2021-08-08', NULL, '2021-08-26 14:33:25'),
-(8, 'https://www.olx.ua/d/obyavlenie/daewoo-lanos-2011-IDKohWN.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/mfnj9lafu2f41-UA/image;s=750x1000', 'Daewoo lanos 2011', '2 600 $', 'Год выпуска: 2011', 'Вид топлива: Бензин', 'Пробег: 69 000 км', 'Автомобиль в рабочем состоянии, мотор не дымит, газ не стоял, требует косметического ремонта кузова. Все вопросы по телефону 09******92', '2021-08-05', NULL, '2021-08-26 14:33:26'),
-(9, 'https://www.olx.ua/d/obyavlenie/lanos-lanos-deu-prodam-IDHj13p.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/6bo7q7tg6slm2-UA/image;s=1376x1032', 'Lanos Ланос деу продам', '4 600 $', 'Год выпуска: 2013', 'Вид топлива: Бензин', 'Пробег: 55 000 км', 'Машина в супер состоянии, без подкрасов и т.п. . Кузов в идеале , двигатель и коробка опель . Пробег родной любые проверки .Салон как новый . Вложений не требует . Только переоформление . Газа нет и не было. Без торга!', '2021-07-28', NULL, '2021-08-26 14:33:27');
+(1, 'https://www.olx.ua/d/obyavlenie/lanos-lanos-deu-prodam-IDHj13p.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/6bo7q7tg6slm2-UA/image;s=1376x1032', 'Lanos Ланос деу продам', 4600, 2013, 'Бензин', 55000, 'Машина в супер состоянии, без подкрасов и т.п. . Кузов в идеале , двигатель и коробка опель . Пробег родной любые проверки .Салон как новый . Вложений не требует . Только переоформление . Газа нет и не было. Без торга!', '2021-08-30', NULL, '2021-09-02 23:26:26'),
+(2, 'https://www.olx.ua/d/obyavlenie/lanos-na-otlichnom-hodu-IDMxmmE.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/2y2avx1esvz9-UA/image;s=2000x1500', 'Ланос на отличном ходу', 2150, 2008, 'Газ / бензин', 215000, 'Срочно продам Ланос 2008 года. В хорошем техническом состоянии.Перебрана передняя подвеска.Автомобиль едет очень уверенно. Есть газ, вписан в документы.Местами притертости по кузову,ничего критичного. Магнитола с флешкой и громкой связью.Гидроусилитель руля.Документы в полном порядке.Не большой расход. Отличный вариант для начинающего водителя.Хороший торг у капота.', '2021-08-24', NULL, '2021-09-02 23:26:27'),
+(3, 'https://www.olx.ua/d/obyavlenie/avtomobil-deo-sens-2011-IDLknjv.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/x19z0vqsuyd21-UA/image;s=1000x750', 'Автомобиль Део Сенс 2011', 3000, 2011, 'Бензин', 146000, 'Део Сенс 2011г. Бензин.Пробег 146000. Машина на ходу, серьезных вложений не требует.', '2021-08-23', NULL, '2021-09-02 23:26:28'),
+(4, 'https://www.olx.ua/d/obyavlenie/prodam-daewoo-lanos-IDLEBuk.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/gju0x16vkhmm2-UA/image;s=1062x1416', 'Продам Daewoo Lanos', 2400, 2011, 'Бензин', 140000, 'Продам Део Ланос, новая резина, гидроуселитель руля, есть нюансы по кузову все вопросы по тел.', '2021-08-21', NULL, '2021-09-02 23:26:29'),
+(5, 'https://www.olx.ua/d/obyavlenie/lanos-lanos-1-5-deu-IDKywYT.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/c2nlfzq9sezn1-UA/image;s=1077x811', 'Lanos Ланос 1.5 деу', 4500, 2013, 'Бензин', 52000, 'Авто в отличном состоянии, без подкрасов , пробег родной - все видно по машине , газа нет и не было . Магнитола, стеклоподъёмники, двухсторонняя сигнализация. Только переоформление Без торга совсем .', '2021-08-13', NULL, '2021-09-02 23:26:29'),
+(6, 'https://www.olx.ua/d/obyavlenie/deo-lanos-daewoo-lanos-IDLSbUw.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/j8wq5ntyvysk-UA/image;s=1600x1200', 'Део Ланос Daewoo Lanos', 3500, 2011, 'Газ / бензин', 69000, 'Продам Ланос, 2011, двигатель 1,5, гидроусилитель, стеклоподъемники, кондиционер заправлен, хорошая резина, тонировка. Кузов без рыжиков, гнили, подкасов и тому подобное. пробег реальный, газ 4 поколение пропан. Ланос состояние идеал 5/5, полностью обслужена, без вложений. Продаю по ТП Возможен обмен на бляху в таком же состоянии под растаможку', '2021-08-08', NULL, '2021-09-02 23:26:30');
 
 -- --------------------------------------------------------
 
@@ -275,7 +272,7 @@ CREATE TABLE `sub_comments` (
 INSERT INTO `sub_comments` (`id`, `text`, `id_comment`, `id_user`, `id_sub_comment`, `created_at`, `updated_at`) VALUES
 (1, '2/1 l urwgr fw', 2, 2, NULL, '2021-08-03 14:58:04', NULL),
 (2, '1/1 cbjwvyq', 1, 2, NULL, '2021-08-03 14:58:15', NULL),
-(3, '4/1  fldnrbq21ve', 4, 1, NULL, '2021-08-03 14:58:48', NULL),
+(3, '4/1  fldnrbq21v8888', 4, 1, NULL, '2021-08-03 14:58:48', '2021-09-07 13:11:43'),
 (4, '3/1 lsduger', 3, 1, NULL, '2021-08-03 14:58:56', NULL),
 (5, '3/2 ldsugreg RRR', 3, 1, NULL, '2021-08-03 14:59:01', '2021-08-03 14:59:19'),
 (6, '3/3 ldsnuggrczteqxwqpo', 3, 1, NULL, '2021-08-03 14:59:08', NULL),
@@ -331,7 +328,8 @@ INSERT INTO `sub_comment_ads` (`id`, `text`, `id_comment`, `id_user`, `id_sub_co
 (21, '4.2 lwngke', 8, 1, NULL, '2021-08-30 13:34:25', NULL),
 (22, '4.3 ekwuirehh', 8, 1, NULL, '2021-08-30 13:34:30', NULL),
 (23, '4.4. ekljngue', 8, 1, NULL, '2021-08-30 13:34:35', NULL),
-(24, '3.1 oruge', 7, 1, NULL, '2021-08-30 13:34:45', NULL);
+(24, '3.1 oruge', 7, 1, NULL, '2021-08-30 13:34:45', NULL),
+(25, '3243', 12, 1, NULL, '2021-09-01 09:52:01', NULL);
 
 -- --------------------------------------------------------
 
@@ -356,7 +354,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `avatar`) VALUES
-(1, 'Anton', 'a@gmail.com', '2021-07-21 08:28:34', '$2y$10$G6H4VlM2M.JS84xHN9z0OO6ze8y7g/PboSjI8/UjQWPn.8WQSMPPu', NULL, '2021-07-21 08:28:22', '2021-07-21 08:28:34', '/storage/uploads/fdOp3Avuv7kStqJx3QwKHt3wQwadMXUzwngS7vUu.jpg'),
+(1, 'Anton', 'arsentii2278@gmail.com', '2021-07-21 08:28:34', '$2y$10$G6H4VlM2M.JS84xHN9z0OO6ze8y7g/PboSjI8/UjQWPn.8WQSMPPu', NULL, '2021-07-21 08:28:22', '2021-07-21 08:28:34', '/storage/uploads/97LJY5G1IA630mNmUcWy8gnwPCes9iqQHPpjhsLk.jpg'),
 (2, 'Boris', 'boris@lar.com', '2021-07-26 10:17:34', '$2y$10$u8KedlMko5FZX9ANf1liKeQlWWGFELIvTvxnZsnwgQ.wqNYZU9tEm', NULL, '2021-07-26 07:14:02', '2021-07-26 10:17:34', '/storage/uploads/1nT9rcEKK352t289H6vlz4WOASmEODHiGtM950Xv.jpg');
 
 --
@@ -497,7 +495,7 @@ ALTER TABLE `oauth_personal_access_clients`
 -- AUTO_INCREMENT для таблицы `parsings`
 --
 ALTER TABLE `parsings`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `sub_comments`
@@ -509,13 +507,13 @@ ALTER TABLE `sub_comments`
 -- AUTO_INCREMENT для таблицы `sub_comment_ads`
 --
 ALTER TABLE `sub_comment_ads`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

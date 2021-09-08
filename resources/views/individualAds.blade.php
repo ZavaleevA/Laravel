@@ -15,10 +15,7 @@
                 <table border="0" style="color: Black;" align="center" width="100%" cellpadding="7" bordercolor="Black">
                 <td bgcolor='white' rowspan="5" width="5%" valign="top"></td>
                 <?
-<<<<<<< HEAD
                     $idAds = $pars->id;
-=======
->>>>>>> 5b9de7c81f13a8a830709d6d5600b81318a874c5
                     if (date("d m Y",strtotime($pars["dates"])) != date('d m Y')) {
                         $arr = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
                         $dateMonthRus = $arr[(date("m",strtotime($pars["dates"]))) - 1];
@@ -30,12 +27,17 @@
                 <td bgcolor='white' valign="top"><br>Опубликовано: {{$finalDate}}</td>
                 <td bgcolor='white' rowspan="5" width="5%" valign="top"></td><tr>
                 <td bgcolor='white' valign="top"><h2>{{$pars->title_name}}</h2></td><tr>
-                <td bgcolor='white' valign="top"><h3><strong>{{$pars->price}}</strong></h3></td><tr>
-                <td bgcolor='white' valign="top"><h4>{{$pars->year}}<br>{{$pars->type_of_fuel}}<br>{{$pars->mileage}}</h4></td><tr>
+                    <?
+                        $price = $pars->price;
+                        $price = number_format($price, 0, ',', ' ');
+                        $mileage = $pars->mileage;
+                        $mileage = number_format($mileage, 0, ',', ' ');
+                    ?>
+                <td bgcolor='white' valign="top"><h3><strong>{{$price}} $</strong></h3></td><tr>
+                <td bgcolor='white' valign="top"><h4>Год выпуска: {{$pars->year}}<br>Вид топлива: {{$pars->type_of_fuel}}<br>Пробег: {{$mileage}} км</h4></td><tr>
                 <td bgcolor='white' valign="top"><h2><strong>Описание</strong></h2><h4>{{$pars->description}}</h4><br></td><tr>
                 </table>
             </div>
-<<<<<<< HEAD
             <br>
             @endforeach
         </div>
@@ -154,11 +156,4 @@
     @endif
 @endforeach    
 <br><br><br>        
-=======
-            <br><br><br>
-            @endforeach
-        </div>
-    </div>
-</div>
->>>>>>> 5b9de7c81f13a8a830709d6d5600b81318a874c5
 @endsection
