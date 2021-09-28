@@ -33,6 +33,10 @@ Route::get('/parsing', function () {
     return view('parsing');
 })->name('parsing');
 
+Route::get('/feedback', function () {
+    return view('feedback');
+})->name('feedback');
+
 Route::get('/ads', function () {
     return view('ads');
 })->name('ads');
@@ -60,6 +64,18 @@ Route::get('/individualAds', function () {
 Route::get('/parsing/allDataParsing', 'ParsingController@allDataParsing')->name('all-data-parsing');
 
 Route::get('/parsing/dateAds/{id}', 'ParsingController@dateAds')->name('date-ads');
+
+Route::get('/parsing/sortByDate/{specialToken}', 'ParsingController@sortByDate')->name('sort-by-date');
+
+Route::get('/parsing/sortFromDear/{specialToken}', 'ParsingController@sortFromDear')->name('sort-from-dear');
+
+Route::get('/parsing/sortFromCheap/{specialToken}', 'ParsingController@sortFromCheap')->name('sort-from-cheap');
+
+Route::get('/parsing/sortFromNew/{specialToken}', 'ParsingController@sortFromNew')->name('sort-from-new');
+
+Route::get('/parsing/sortFromOld/{specialToken}', 'ParsingController@sortFromOld')->name('sort-from-old');
+
+Route::get('/parsing/sortByMileage/{specialToken}', 'ParsingController@sortByMileage')->name('sort-by-mileage');
 
 Route::get('/parsing/filterAds', 'ParsingController@filterAds')->name('filter-ads');
 
@@ -122,6 +138,8 @@ Route::get('/comment/all', 'CommentController@allData')->name('comment-data');
 Route::post('/comment/submit', 'CommentController@submit')->name('comment-form');
 
 Route::post('/commentAds/addCommentAds/{id}', 'CommentAdsController@addCommentAds')->name('add-comment-ads');
+
+Route::post('/feedback/dataFeedback', 'FeedbackController@dataFeedback')->name('data-feedback');
 
 Route::post('/image/upload', 'ImageController@upload')->name('image.upload');
 

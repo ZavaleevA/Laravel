@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Сен 08 2021 г., 11:18
+-- Время создания: Сен 28 2021 г., 18:20
 -- Версия сервера: 8.0.19
 -- Версия PHP: 8.0.1
 
@@ -65,18 +65,18 @@ CREATE TABLE `comment_ads` (
 --
 
 INSERT INTO `comment_ads` (`id`, `user_id`, `ads_id`, `text`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, '1 comment dksbgjhr', '2021-08-30 13:21:07', NULL),
-(2, 1, 1, '2 comment kabfhebw', '2021-08-30 13:21:15', NULL),
-(3, 1, 2, '1 comment kbawttqrdrw', '2021-08-30 13:21:40', NULL),
-(4, 1, 2, '2 comment Tetst2', '2021-08-30 13:21:49', NULL),
-(5, 1, 3, '1 com Rhkrbwg', '2021-08-30 13:22:01', NULL),
-(6, 1, 3, '2 com Whqgvewgf', '2021-08-30 13:22:09', NULL),
-(7, 2, 3, '3 com Wkeeeee', '2021-08-30 13:22:59', '2021-08-30 13:23:15'),
-(8, 2, 3, '4 com BHwttqevfwf', '2021-08-30 13:23:07', NULL),
-(9, 2, 2, '3 comment pieif', '2021-08-30 13:28:49', NULL),
-(10, 2, 2, '4 comment yiageyfw', '2021-08-30 13:28:57', NULL),
-(11, 2, 1, '3 kenuifurbeygbwbfuewbirwg', '2021-08-30 13:29:08', NULL),
-(12, 2, 1, '4 qwertyuiopasdfghjkl', '2021-08-30 13:29:16', NULL);
+(1, 1, 1, '1 lfknng', '2021-09-20 12:20:13', NULL),
+(2, 1, 1, '2 dksnlfnwlfe', '2021-09-20 12:20:20', NULL),
+(3, 1, 2, '1 best ads', '2021-09-20 12:20:29', NULL),
+(4, 1, 2, '2 kneflw', '2021-09-20 12:20:34', NULL),
+(5, 1, 3, '1 lejknjjf', '2021-09-20 12:20:41', NULL),
+(6, 1, 3, '2 ldnfjekfwe', '2021-09-20 12:20:49', NULL),
+(7, 2, 1, '3 krjgne', '2021-09-20 12:22:26', NULL),
+(8, 2, 1, '4 douhefw', '2021-09-20 12:22:31', NULL),
+(9, 2, 2, '3 krgnreg', '2021-09-20 12:22:38', NULL),
+(10, 2, 2, '4 iwqwuuwuquwwqwwq', '2021-09-20 12:22:45', NULL),
+(11, 2, 3, '3 kbgkwegg', '2021-09-20 12:23:56', NULL),
+(12, 2, 3, '4 sukhywfyuqwf', '2021-09-20 12:24:04', NULL);
 
 -- --------------------------------------------------------
 
@@ -230,12 +230,13 @@ CREATE TABLE `parsings` (
 --
 
 INSERT INTO `parsings` (`id`, `url_ads`, `url_image`, `title_name`, `price`, `year`, `type_of_fuel`, `mileage`, `description`, `dates`, `updated_at`, `created_at`) VALUES
-(1, 'https://www.olx.ua/d/obyavlenie/lanos-lanos-deu-prodam-IDHj13p.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/6bo7q7tg6slm2-UA/image;s=1376x1032', 'Lanos Ланос деу продам', 4600, 2013, 'Бензин', 55000, 'Машина в супер состоянии, без подкрасов и т.п. . Кузов в идеале , двигатель и коробка опель . Пробег родной любые проверки .Салон как новый . Вложений не требует . Только переоформление . Газа нет и не было. Без торга!', '2021-08-30', NULL, '2021-09-02 23:26:26'),
-(2, 'https://www.olx.ua/d/obyavlenie/lanos-na-otlichnom-hodu-IDMxmmE.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/2y2avx1esvz9-UA/image;s=2000x1500', 'Ланос на отличном ходу', 2150, 2008, 'Газ / бензин', 215000, 'Срочно продам Ланос 2008 года. В хорошем техническом состоянии.Перебрана передняя подвеска.Автомобиль едет очень уверенно. Есть газ, вписан в документы.Местами притертости по кузову,ничего критичного. Магнитола с флешкой и громкой связью.Гидроусилитель руля.Документы в полном порядке.Не большой расход. Отличный вариант для начинающего водителя.Хороший торг у капота.', '2021-08-24', NULL, '2021-09-02 23:26:27'),
-(3, 'https://www.olx.ua/d/obyavlenie/avtomobil-deo-sens-2011-IDLknjv.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/x19z0vqsuyd21-UA/image;s=1000x750', 'Автомобиль Део Сенс 2011', 3000, 2011, 'Бензин', 146000, 'Део Сенс 2011г. Бензин.Пробег 146000. Машина на ходу, серьезных вложений не требует.', '2021-08-23', NULL, '2021-09-02 23:26:28'),
-(4, 'https://www.olx.ua/d/obyavlenie/prodam-daewoo-lanos-IDLEBuk.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/gju0x16vkhmm2-UA/image;s=1062x1416', 'Продам Daewoo Lanos', 2400, 2011, 'Бензин', 140000, 'Продам Део Ланос, новая резина, гидроуселитель руля, есть нюансы по кузову все вопросы по тел.', '2021-08-21', NULL, '2021-09-02 23:26:29'),
-(5, 'https://www.olx.ua/d/obyavlenie/lanos-lanos-1-5-deu-IDKywYT.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/c2nlfzq9sezn1-UA/image;s=1077x811', 'Lanos Ланос 1.5 деу', 4500, 2013, 'Бензин', 52000, 'Авто в отличном состоянии, без подкрасов , пробег родной - все видно по машине , газа нет и не было . Магнитола, стеклоподъёмники, двухсторонняя сигнализация. Только переоформление Без торга совсем .', '2021-08-13', NULL, '2021-09-02 23:26:29'),
-(6, 'https://www.olx.ua/d/obyavlenie/deo-lanos-daewoo-lanos-IDLSbUw.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/j8wq5ntyvysk-UA/image;s=1600x1200', 'Део Ланос Daewoo Lanos', 3500, 2011, 'Газ / бензин', 69000, 'Продам Ланос, 2011, двигатель 1,5, гидроусилитель, стеклоподъемники, кондиционер заправлен, хорошая резина, тонировка. Кузов без рыжиков, гнили, подкасов и тому подобное. пробег реальный, газ 4 поколение пропан. Ланос состояние идеал 5/5, полностью обслужена, без вложений. Продаю по ТП Возможен обмен на бляху в таком же состоянии под растаможку', '2021-08-08', NULL, '2021-09-02 23:26:30');
+(1, 'https://www.olx.ua/d/obyavlenie/prodam-avtomobil-lanos-1-5-IDMJFt5.html#abc5269872;promoted', 'https://ireland.apollo.olxcdn.com:443/v1/files/nortmdaqzpfj3-UA/image;s=1200x1600', 'Продам автомобиль Ланос 1.5', 2700, 2008, 'Газ / бензин', 260000, 'Продам автомобиль Ланос. Объем двигателя 1,5. Состояние на фото. Есть кондиционер, электро стеклоподъёмники, усилитель руля. Стоимость 2700 без торга! Обмен не интересует!', '2021-09-18', NULL, '2021-09-20 15:00:24'),
+(2, 'https://www.olx.ua/d/obyavlenie/srochno-prodam-lanos-IDMxmmE.html#abc5269872;promoted', 'https://ireland.apollo.olxcdn.com:443/v1/files/2y2avx1esvz9-UA/image;s=2000x1500', 'Срочно продам Ланос', 1999, 2008, 'Газ / бензин', 215000, '2008 год. Перебрана передняя подвеска.Едет хорошо.Коробка,двигатель без нареканий.Газ вписан в ТП. Без ДТП,местами притертости по кузову,ничего критичного. Магнитола с флешкой и громкой связью.ГУР,ЦЗ.Документы в полном порядке. Переоформление.', '2021-09-18', NULL, '2021-09-20 15:00:25'),
+(3, 'https://www.olx.ua/d/obyavlenie/prodam-lanos-1-4-IDMLHWK.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/fl0wxxsznmkt1-UA/image;s=688x1416', 'Продам ланос 1.4', 2800, 2008, 'Газ / бензин', 192000, 'Состояние хорошее по желанию поменять лобовое стекло и правое крыло би ксенон в фарах и туманках', '2021-09-18', NULL, '2021-09-20 15:00:26'),
+(4, 'https://www.olx.ua/d/obyavlenie/daewoo-lanos-1-5-IDMJI9L.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/cop42tur5cvh1-UA/image;s=1600x1200', 'Daewoo Lanos 1.5', 3500, 2008, 'Бензин', 175000, 'Продам ухоженный автомобиль, ТО производителось своевременно. Польская сборка. Двигатель (1.5) и кпп в отличном состоянии. Стоит 2дин магнитола, есть сигнализация. Газа нету и некогда не было. По кузову все ок, красить либо варить не нужно. Присутствует небольшой торг. Я 2владелец. Все интересующие вас вопросы по телефону.', '2021-09-14', NULL, '2021-09-20 15:00:27'),
+(5, 'https://www.olx.ua/d/obyavlenie/lanos-lanos-1-5-deu-IDKywYT.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/c2nlfzq9sezn1-UA/image;s=1077x811', 'Lanos Ланос 1.5 деу', 4500, 2013, 'Бензин', 52000, 'Авто в отличном состоянии, без подкрасов , пробег родной - все видно по машине , газа нет и не было . Магнитола, стеклоподъёмники, двухсторонняя сигнализация. Только переоформление Без торга совсем .', '2021-09-14', NULL, '2021-09-20 15:00:28'),
+(6, 'https://www.olx.ua/d/obyavlenie/prodam-daewoo-lanos-IDMHdcE.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/yitclj1ofqxx1-UA/image;s=1040x780', 'Продам Daewoo Lanos', 3600, 2008, 'Газ / бензин', 145, 'Отличное состояние. Кузов абсолютно целый и без ржавчины. Мотор, ходовая на отлично. Гидроусилитель руля. Газ-пропан(вписан в техпаспорт). По машине ничего делать не надо', '2021-09-10', NULL, '2021-09-20 15:00:29'),
+(7, 'https://www.olx.ua/d/obyavlenie/lanos-lanos-deu-prodam-IDHj13p.html#abc5269872', 'https://ireland.apollo.olxcdn.com:443/v1/files/6bo7q7tg6slm2-UA/image;s=1376x1032', 'Lanos Ланос деу продам', 4600, 2013, 'Бензин', 55000, 'Машина в супер состоянии, без подкрасов и т.п. . Кузов в идеале , двигатель и коробка опель . Пробег родной любые проверки .Салон как новый . Вложений не требует . Только переоформление . Газа нет и не было. Без торга!', '2021-08-30', NULL, '2021-09-20 15:00:30');
 
 -- --------------------------------------------------------
 
@@ -305,31 +306,33 @@ CREATE TABLE `sub_comment_ads` (
 --
 
 INSERT INTO `sub_comment_ads` (`id`, `text`, `id_comment`, `id_user`, `id_sub_comment`, `created_at`, `updated_at`) VALUES
-(1, '1.1 ruegie', 5, 2, NULL, '2021-08-30 13:27:55', NULL),
-(2, '2.1 Uebjwgbreg', 6, 2, NULL, '2021-08-30 13:28:06', NULL),
-(3, '2.1 jnrugeuruegirugreuuuuuuuuuuuuuuuuuuuuuuuuur', 4, 2, NULL, '2021-08-30 13:28:24', NULL),
-(4, '1.1 neuwururopqoepoqw', 3, 2, NULL, '2021-08-30 13:28:38', NULL),
-(5, '2.1 njkvbhrbgrjegber', 2, 2, NULL, '2021-08-30 13:29:24', NULL),
-(6, '1.1 eflewnjnrkgte', 1, 2, NULL, '2021-08-30 13:29:35', NULL),
-(7, '4.1 lrmgiemithrT', 12, 1, NULL, '2021-08-30 13:30:15', NULL),
-(8, '3.1 Lekiwfjoehuwh wuyqgwu Yyebbfwr weohurehgu ewuhguh wgiewfybcbebf iwe fgwibgti', 11, 1, NULL, '2021-08-30 13:30:37', NULL),
-(9, '1.1.1. kjfeuirnegjtrYYYY', 1, 1, 6, '2021-08-30 13:30:50', '2021-08-30 13:31:03'),
-(10, '2.1.1. elnreguueogn', 2, 1, 5, '2021-08-30 13:31:20', NULL),
-(11, '2.1.2. lsnguientg', 2, 1, 5, '2021-08-30 13:31:27', NULL),
-(12, '4.1 emgiwnr', 10, 1, NULL, '2021-08-30 13:31:50', NULL),
-(13, '3.1. elnwerPPPPP', 9, 1, NULL, '2021-08-30 13:31:59', '2021-08-30 13:32:52'),
-(14, '3.2 ekfeuwiefw', 9, 1, NULL, '2021-08-30 13:32:06', NULL),
-(15, '1.1.1. nefwi Eqjwbjw', 3, 1, 4, '2021-08-30 13:32:20', NULL),
-(16, '2.1.1 ekhuiregreg', 4, 1, 3, '2021-08-30 13:32:33', NULL),
-(17, '2.1.2 Yejwbrjeg', 4, 1, 3, '2021-08-30 13:32:39', NULL),
-(18, '1.1.1 emgoerg', 5, 1, 1, '2021-08-30 13:33:48', NULL),
-(19, '2.1.1 Ueubwkgekg', 6, 1, 2, '2021-08-30 13:34:10', NULL),
-(20, '4.1 lewnguerg', 8, 1, NULL, '2021-08-30 13:34:20', NULL),
-(21, '4.2 lwngke', 8, 1, NULL, '2021-08-30 13:34:25', NULL),
-(22, '4.3 ekwuirehh', 8, 1, NULL, '2021-08-30 13:34:30', NULL),
-(23, '4.4. ekljngue', 8, 1, NULL, '2021-08-30 13:34:35', NULL),
-(24, '3.1 oruge', 7, 1, NULL, '2021-08-30 13:34:45', NULL),
-(25, '3243', 12, 1, NULL, '2021-09-01 09:52:01', NULL);
+(1, '1.1 kjngjreg', 1, 2, NULL, '2021-09-20 12:22:06', NULL),
+(2, '2.1 lngjkg', 2, 2, NULL, '2021-09-20 12:22:17', NULL),
+(3, '2.1 kvjnr', 4, 2, NULL, '2021-09-20 12:22:59', NULL),
+(4, '2.2. rkuhure', 4, 2, NULL, '2021-09-20 12:23:05', NULL),
+(5, '1.1 ejkwyeyeywetwbnlkdmcsdfr', 3, 2, NULL, '2021-09-20 12:23:16', NULL),
+(6, '1.1 ekeyiefnr', 5, 2, NULL, '2021-09-20 12:24:13', NULL),
+(7, '2.1 keb xgwq', 6, 2, NULL, '2021-09-20 12:24:27', NULL),
+(8, '1.1.1 lgrnmlreg', 1, 1, 1, '2021-09-20 12:25:32', NULL),
+(9, '2.1.1 rkuryefbvjew', 2, 1, 2, '2021-09-20 12:25:47', NULL),
+(10, '4.1 lngjeg', 8, 1, NULL, '2021-09-20 12:25:57', NULL),
+(11, '3.1 ljewebx', 7, 1, NULL, '2021-09-20 12:26:08', NULL),
+(12, '1.1.1 rjlllllllllllllllllllrjc', 3, 1, 5, '2021-09-20 12:26:41', NULL),
+(13, '2.1.1 leufenw', 4, 1, 3, '2021-09-20 12:26:54', NULL),
+(14, '3.1 nnnrbbxlekfopewfj', 9, 1, NULL, '2021-09-20 12:27:13', NULL),
+(15, '4.1 kdbwyvuwqdhwqbfke', 10, 1, NULL, '2021-09-20 12:27:25', NULL),
+(16, '1.1.1 lfnejbwytqu', 5, 1, 6, '2021-09-20 12:27:51', NULL),
+(17, '4.1 ejcne', 12, 1, NULL, '2021-09-20 12:28:02', NULL),
+(18, '3.1 bxvvrqtwekgkkmrg', 11, 1, NULL, '2021-09-20 12:28:17', NULL),
+(19, '2.1.1 dcbeebyefu', 6, 1, 7, '2021-09-20 12:28:34', NULL),
+(20, '3.1.1 vlrkngleg', 7, 2, 11, '2021-09-20 12:29:17', NULL),
+(21, '3.1.2 djeuigeg', 7, 2, 11, '2021-09-20 12:29:25', NULL),
+(22, '3.1.3 sgwcqfww', 7, 2, 11, '2021-09-20 12:29:33', NULL),
+(23, '4.1.1 djkneuuhweyew', 8, 2, 10, '2021-09-20 12:29:47', NULL),
+(24, '4.1.1 ljdnenk', 10, 2, 15, '2021-09-20 12:30:29', NULL),
+(25, '3.1.1. ekjwenkwe', 9, 2, 14, '2021-09-20 12:30:40', NULL),
+(26, '3.1.1 djnvbq', 11, 2, 18, '2021-09-20 12:31:06', NULL),
+(27, '4.1.1 nhdwvqtfwflegreg', 12, 2, 17, '2021-09-20 12:31:24', NULL);
 
 -- --------------------------------------------------------
 
@@ -354,8 +357,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `avatar`) VALUES
-(1, 'Anton', 'arsentii2278@gmail.com', '2021-07-21 08:28:34', '$2y$10$G6H4VlM2M.JS84xHN9z0OO6ze8y7g/PboSjI8/UjQWPn.8WQSMPPu', NULL, '2021-07-21 08:28:22', '2021-07-21 08:28:34', '/storage/uploads/97LJY5G1IA630mNmUcWy8gnwPCes9iqQHPpjhsLk.jpg'),
-(2, 'Boris', 'boris@lar.com', '2021-07-26 10:17:34', '$2y$10$u8KedlMko5FZX9ANf1liKeQlWWGFELIvTvxnZsnwgQ.wqNYZU9tEm', NULL, '2021-07-26 07:14:02', '2021-07-26 10:17:34', '/storage/uploads/1nT9rcEKK352t289H6vlz4WOASmEODHiGtM950Xv.jpg');
+(1, 'Anton', 'a@gmail.com', '2021-07-21 08:28:34', '$2y$10$G6H4VlM2M.JS84xHN9z0OO6ze8y7g/PboSjI8/UjQWPn.8WQSMPPu', NULL, '2021-07-21 08:28:22', '2021-07-21 08:28:34', '/storage/uploads/97LJY5G1IA630mNmUcWy8gnwPCes9iqQHPpjhsLk.jpg'),
+(2, 'Boris', 'zavaleev.sbase@gmail.com', '2021-07-26 10:17:34', '$2y$10$u8KedlMko5FZX9ANf1liKeQlWWGFELIvTvxnZsnwgQ.wqNYZU9tEm', NULL, '2021-07-26 07:14:02', '2021-07-26 10:17:34', '/storage/uploads/1nT9rcEKK352t289H6vlz4WOASmEODHiGtM950Xv.jpg');
 
 --
 -- Индексы сохранённых таблиц
@@ -459,7 +462,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `comment_ads`
@@ -495,7 +498,7 @@ ALTER TABLE `oauth_personal_access_clients`
 -- AUTO_INCREMENT для таблицы `parsings`
 --
 ALTER TABLE `parsings`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT для таблицы `sub_comments`
@@ -507,7 +510,7 @@ ALTER TABLE `sub_comments`
 -- AUTO_INCREMENT для таблицы `sub_comment_ads`
 --
 ALTER TABLE `sub_comment_ads`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
