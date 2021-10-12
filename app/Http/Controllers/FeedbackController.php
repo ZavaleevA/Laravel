@@ -8,6 +8,7 @@ use Mail;
 class FeedbackController extends Controller
 {
     public function dataFeedback(Request $req){
+        $recaptcha = $req->input('g-recaptcha-response');
         $name = $req->input('name');
         $email = $req->input('email');
         $text = $req->input('text');
@@ -20,6 +21,8 @@ class FeedbackController extends Controller
             return redirect()->back()->with('error', 'Вы не ввели email! Пожалуйста, заполните все поля еще раз!');
         } elseif ($text == NULL) {
             return redirect()->back()->with('error', 'Вы не ввели текст сообщения! Пожалуйста, заполните все поля еще раз!');
+        } elseif ($recaptcha == NULL) {
+            return redirect()->back()->with('error', 'Вы не прошли проверку "Я не робот" ! Пожалуйста, заполните все поля еще раз!');
         }
 
         $textForEmail = '💫Получен новый отзыв от пользвателя ' . $name . ' с сайта Laravel! Ниже находиться вся подробная информация.' . "\n\n" . 

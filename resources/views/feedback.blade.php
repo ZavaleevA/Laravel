@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title-block')Обратная связь @endsection
-
+<script src='https://www.google.com/recaptcha/api.js'></script>
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -29,6 +29,7 @@
                         <input type="name" class="form-control" name="name" id="name" placeholder="Введите имя"><br>
                         <input type="email" class="form-control" name="email" id="email" placeholder="Введите email"><br>
                         <textarea class="form-control" name="text" id="text" rows="3" placeholder="Введите свое сообщения"></textarea><br>
+                        <div class="g-recaptcha" data-sitekey="6LeJYcQcAAAAAJTtHe7gmzMHjnOvyKM2co_6TwI_"></div><br>
                         <button class="btn btn-success" type="submit">Отправить письмо</button>
                     </form>
                 </div>
